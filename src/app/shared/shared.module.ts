@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   // used to import and export the shared modules
   exports: [
     CommonModule
-  ]
+  ],
   declarations: []
 })
 export class SharedModule { 
