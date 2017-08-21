@@ -9,12 +9,11 @@ import { CommonModule } from '@angular/common';
 })
 export class CoreModule {
 
-
-  //  import 'SkipSelf' to avoid the dead loop
-  // import 'Optional' to let the component test first time pass.
+  // core module only needs to be loaded once, import SkipSelf
+  // first load import the Optional
   constructor(@Optional() @SkipSelf() parent: CoreModule) {
     if (parent) {
-      throw new Error('module already exist, can not load');
+      throw Error('module existed, cannot load again');
     }
   }
  }

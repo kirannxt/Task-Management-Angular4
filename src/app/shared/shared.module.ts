@@ -1,3 +1,5 @@
+// this module only used to provide one single port.
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -5,13 +7,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule
   ],
-
-  // used to import and export the shared modules
   exports: [
     CommonModule
-  ],
-  declarations: []
+  ]
 })
-export class SharedModule { 
-
-}
+export class SharedModule { }
