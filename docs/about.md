@@ -1,4 +1,8 @@
 
+## The Details around this project
+
+### Construct by Angular Material
+
 #### Initial Layout
 
 Creae the 'core' module, and 'app' import it, in the 'core'
@@ -102,5 +106,8 @@ firstly, create the '/shared' module to import and export the shared modules suc
 secondly, create the '/login' module and component, used to complete the login page.
 thirdly, create the 'login-routing.module.ts' and 'app-routing.module.ts' to match the respectively module.ts. and then let the 'app.module.ts' import the 'login.module.ts'.
 
+#### Modify the Login page by md-card tag
+
+here, just be familiar with the 'md-card' constructure.
 
 
