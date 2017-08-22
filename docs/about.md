@@ -114,6 +114,47 @@ here, just be familiar with the 'md-card' constructure.
 
 here, I use md-nav-list to create sidebar, and use the foreach function to show the realtime date on the md-icon, which are imported from '/utils/svg.util.ts'.
 
+#### Create the self-define material theme
+
+create the '/theme.scss' define my theme.
+
+```
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+// define the light theme
+$my-app-primary: mat-palette($mat-indigo);
+$my-app-accent: mat-palette($mat-pink, A200, A100, A100);
+$my-app-warn: mat-palette($mat-red);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include angular-material-theme($my-app-theme);
+
+
+// define the dark theme
+$my-dark-primary: mat-palette($mat-blue-grey);
+$my-dark-accent: mat-palette($mat-amber, A200, A100, A100);
+$my-dark-warn: mat-palette($mat-orange);
+
+$my-dark-theme: mat-light-theme($my-dark-primary, $my-dark-accent, $my-dark-warn);
+
+.myapp-dark-theme {
+    @include angular-material-theme($my-dark-theme);
+}
+```
+
+here I define two theme, and assign the second one to classname'myapp-dark-theme'.
+
+provide 
+```
+<md-sidenav-container [class.myapp-dark-theme]="darkTheme">
+```
+to let the whole project switch each other. Here also notice the data transimit from child 'header' component to parent 'app' component by EventEmmiter().
+
 
 
 
