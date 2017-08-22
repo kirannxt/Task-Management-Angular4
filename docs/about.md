@@ -1,6 +1,7 @@
 
-1.
-creae the 'core' module, and 'app' import it, in the 'core'
+#### Initial Layout
+
+Creae the 'core' module, and 'app' import it, in the 'core'
 create the components 'header', 'footer', and 'sidebar' components, let 'core' import them and export them, thus 'app' module will access these components.
 
 familiar with flex layout
@@ -46,7 +47,7 @@ if want to put the element center position
 }
 ```
 
-transmit the data(method) from one component to parent one.
+#### Transmit the data(method) from one component to parent one.
 
 firstly, define the method needed to emmit
 
@@ -60,6 +61,8 @@ and then let the target element (its parent element) receive it.
 <app-header (toggle)="sidenav.toggle()"></app-header>
 
 ```
+
+#### Create the self-defined icon font
 
 Here I also use icon font from 'iconfont.com', so I need to import the needed svg file to '/assets'
 directory. 
@@ -92,4 +95,12 @@ at last, header.component.ts will use it
 ```
 <md-icon svgIcon="menu"></md-icon>
 ```
+
+#### Distach the routing files in different modules
+
+firstly, create the '/shared' module to import and export the shared modules such as 'MdToolbarModule,MdIconModule, MdButtonModule, MdCardModule, MdInputModule', thus many modules can just import this 'shared' moduel.
+secondly, create the '/login' module and component, used to complete the login page.
+thirdly, create the 'login-routing.module.ts' and 'app-routing.module.ts' to match the respectively module.ts. and then let the 'app.module.ts' import the 'login.module.ts'.
+
+
 
