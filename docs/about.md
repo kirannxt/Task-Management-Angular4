@@ -110,4 +110,10 @@ thirdly, create the 'login-routing.module.ts' and 'app-routing.module.ts' to mat
 
 here, just be familiar with the 'md-card' constructure.
 
+#### Create the sidebar
+
+here, I use md-nav-list to create sidebar, and use the foreach function to show the realtime date on the md-icon, which are imported from '/utils/svg.util.ts'.
+
+
+
 
