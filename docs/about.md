@@ -353,6 +353,25 @@ firstly, I use [mdDatepicker] to bind the button with 'md-datepicker' tag.
 and then transmit the data from 'task-header' component to 'task-home' component, and let the latter one execute the 'openNewTaskDialog' method to open 'new-task' dialog. Here notice, `entryComponents: [NewTaskComponent]`, 'NewTaskComponent' is dialog component, so should put in entryComponents.
 
 
+#### Create copy-task component
+
+First one, I use dialog to receive the data
+
+```
+...
+constructor(@Inject(MD_DIALOG_DATA) private data, private dialogRef: MdDialogRef<CopyTaskComponent>) { }
+...
+```
+Second one, transfer the event from 'task-header' component to 'task-home' component, and let 'task-home' component transfer the data by
+
+```
+openCopyTaskDialog() {
+    const dialogRef = this.dialog.open(CopyTaskComponent, {data: {lists: this.lists}});
+  }
+```
+
+
+
 
 
 

@@ -18,7 +18,8 @@ import {
   MdTooltipModule,
   MdDatepickerModule,
   MdRadioModule,
-  MdNativeDateModule
+  MdNativeDateModule,
+  MdSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -39,7 +40,8 @@ import {
     MdTooltipModule,
     MdDatepickerModule,
     MdRadioModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdSelectModule
   ],
   exports: [
     CommonModule,
@@ -58,7 +60,8 @@ import {
     MdTooltipModule,
     MdDatepickerModule,
     MdRadioModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdSelectModule
   ]
 })
 export class SharedModule { }
