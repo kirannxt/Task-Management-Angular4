@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    overflow-x: scroll; 
 }
 
 .list-container {
@@ -20,3 +20,4 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+

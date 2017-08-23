@@ -19,18 +19,23 @@ export class TaskHomeComponent implements OnInit {
         {
           id: 1,
           desc: 'task one: buy coffee',
+          completed: true,
+          priority: 3,
           owner: {
             id: 1,
             name: 'rick',
             avatar: 'avatars:svg-11'
           },
-          dueDate: new Date()
+          dueDate: new Date(),
+          remainder: new Date()
     
         },
 
         {
           id: 2,
           desc: 'task two: reday homework',
+          completed: false,
+          priority: 2,
           owner: {
             id: 1,
             name: 'leo',
@@ -51,24 +56,30 @@ export class TaskHomeComponent implements OnInit {
         {
           id: 1,
           desc: 'task three: verify the project',
+          completed: false,
+          priority: 1,
           owner: {
             id: 1,
             name: 'liyue',
             avatar: 'avatars:svg-13'
           },
-          dueDate: new Date()
+          dueDate: new Date(),
+          remainder: new Date()
     
         },
 
         {
           id: 2,
           desc: 'task four: design plan',
+          completed: false,
+          priority: 3,
           owner: {
             id: 1,
             name: 'claire',
             avatar: 'avatars:svg-14'
           },
-          dueDate: new Date()
+          dueDate: new Date(),
+          remainder: new Date()
     
         }
 
@@ -83,6 +94,8 @@ export class TaskHomeComponent implements OnInit {
         {
           id: 1,
           desc: 'task five: complete plan',
+          completed: true,
+          priority: 2,
           owner: {
             id: 1,
             name: 'aj',
@@ -95,6 +108,8 @@ export class TaskHomeComponent implements OnInit {
         {
           id: 2,
           desc: 'task six: complete homework',
+          completed: true,
+          priority: 3,
           owner: {
             id: 1,
             name: 'amahli',
@@ -108,7 +123,7 @@ export class TaskHomeComponent implements OnInit {
     }
 
     
-  ]
+  ];
 
   constructor() { }
 

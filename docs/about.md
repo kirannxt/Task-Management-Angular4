@@ -314,7 +314,26 @@ while in the 'task-list.component.ts', the task-list only contain 'ng-content' t
 </md-list>
 ```
 
+#### Modify the 'task-item' component
 
+Here I use the ngClass to match the data property
+
+```
+...
+[ngClass]="{
+                    'priority-normal': item.priority === 3,
+                    'priority-important': item.priority === 2,
+                    'priority-emergency': item.priority === 1}"
+...
+```
+
+and filter some data by pipe and *ngIf
+
+```
+<span class="due-date" *ngIf="item.dueDate">
+      {{item.dueDate | date: "dd/MM/yy"}}
+    </span>
+```
 
 
 
