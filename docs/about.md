@@ -291,6 +291,31 @@ OpenInviteDialog() {
 
 I just let the 'project-list' as the smart component, which deal with the event logic, and the dump 'project-item' component execute the pure click event.
 
+#### Create the Task module and components
+
+Same as the upon coding, I create 'task.module.ts' and '/task/task.components', and add the routing file to match the 'app-routing.module.ts'.
+
+in the 'task-home.component.ts', the app-task-list contains the two for loops
+
+```
+ <app-task-list *ngFor="let list of lists" class="list-container">
+    <app-task-header [header]="list.name"></app-task-header>
+    <app-task-item *ngFor="let task of list.tasks">
+
+    </app-task-item>
+</app-task-list>
+```
+
+while in the 'task-list.component.ts', the task-list only contain 'ng-content' tag
+
+```
+<md-list>
+  <ng-content></ng-content>
+</md-list>
+```
+
+
+
 
 
 
