@@ -6,6 +6,7 @@ import {MdDialog} from '@angular/material';
 // import the new project dialog component
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-project-list',
@@ -34,10 +35,7 @@ export class ProjectListComponent implements OnInit {
   // open the dedicated component.
   openNewProjectDialog() {
     const dialogRef =  this.dialog.open(NewProjectComponent, {
-      width: '800px',
-      height: '300px', 
-      position: {left: '0', top: '0'},
-      data: {dark: true }
+      data: {title: 'New Project' }
     });
 
     dialogRef.afterClosed().subscribe(result => console.log(result));
@@ -45,6 +43,15 @@ export class ProjectListComponent implements OnInit {
 
   OpenInviteDialog() {
     const dialogRef = this.dialog.open(InviteComponent);
+  }
+
+  openUpdateDialog() {
+    const dialogRef =  this.dialog.open(NewProjectComponent, {data: {title: 'Edit Project'}});
+  }
+
+  openConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: 'Delete Project', content: 'are you sure to delete this project?'}});
+    dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 
 }

@@ -11,6 +11,8 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 })
 export class NewProjectComponent implements OnInit {
 
+  title = '';
+
 
   //  data used for the data send here, and dialogref used for the data send outside., import the theme
   constructor(@Inject(MD_DIALOG_DATA) private data, 
@@ -18,7 +20,8 @@ export class NewProjectComponent implements OnInit {
 
   ngOnInit() {
     //  the data will show from other component 'project-list'
-    console.log(this.data);
+    this.title = this.data.title;
+    console.log(JSON.stringify(this.data));
   }
 
   onClick() {
