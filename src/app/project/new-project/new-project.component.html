@@ -1,0 +1,17 @@
+
+<form>
+  <h2 md-dialog-title>New Project</h2>
+  <div md-dialog-content>
+    <md-input-container class="full-width">
+      <input mdInput type="text" placeholder="project name">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput type="text" placeholder="project description">
+    </md-input-container>
+  </div>
+
+  <div md-dialog-actions>
+    <button type="button" md-raised-button color="primary" (click)="onClick()">Save</button>
+    <button type="button" md-button md-dialog-close>Close</button>
+  </div>
+</form>

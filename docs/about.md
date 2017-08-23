@@ -177,6 +177,61 @@ in 'register.component.html'
 </md-grid-list>
 ```
 
+#### Deal with the MdDialog tag in 'project' module
+
+Create the project directory, and realize the data transition between 'project-list' and 'new-project' component.
+
+Firstly, declare the 'new-project' component and import in 'entryComponents' in 'project.module.ts'. it is special for md-dialog
+
+```
+entryComponents: [
+    NewProjectComponent, 
+    InviteComponent
+  ]
+```
+
+in the 'porject-list' component, I send the data by
+
+```
+......
+import {MdDialog} from '@angular/material';
+......
+
+constructor(private dialog: MdDialog) { }
+......
+
+openNewProjectDialog() {
+    const dialogRef =  this.dialog.open(NewProjectComponent, {
+      width: '800px',
+      height: '300px', 
+      position: {left: '0', top: '0'},
+      data: {dark: true }
+    });
+``` 
+
+and then in 'new-project' component, it will receive the data
+
+```
+import {MD_DIALOG_DATA, MdDialogRef, OverlayContainer} from '@angular/material';
+......
+
+constructor(@Inject(MD_DIALOG_DATA) private data, 
+              private dialogRef: MdDialogRef<NewProjectComponent>,
+              private oc: OverlayContainer) { }
+ ......
+
+ onClick() {
+    this.dialogRef.close('I received your data');
+  }
+  .....             
+```
+
+if I want to send the message back to the 'project-list' component, I will get it in 'project-list' component
+
+```
+dialogRef.afterClosed().subscribe(result => console.log(result));
+```
+
 
 
 
