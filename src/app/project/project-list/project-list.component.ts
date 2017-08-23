@@ -5,6 +5,7 @@ import {MdDialog} from '@angular/material';
 
 // import the new project dialog component
 import {NewProjectComponent} from '../new-project/new-project.component';
+import {InviteComponent} from '../invite/invite.component';
 
 @Component({
   selector: 'app-project-list',
@@ -40,6 +41,10 @@ export class ProjectListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  OpenInviteDialog() {
+    const dialogRef = this.dialog.open(InviteComponent);
   }
 
 }

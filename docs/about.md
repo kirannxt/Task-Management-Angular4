@@ -55,7 +55,7 @@ if want to put the element center position
 
 firstly, define the method needed to emmit
 
-``
+```
 @Output() toggle = new EventEmitter<void>();
 ```
 
@@ -231,6 +231,66 @@ if I want to send the message back to the 'project-list' component, I will get i
 ```
 dialogRef.afterClosed().subscribe(result => console.log(result));
 ```
+
+#### Create 'Invite' component by 'MdAutocompleteModule' 
+
+When I search some member, just auto spread the member list by 'md-autocomplete' tag in 'invite' component, here input match with md-autocomplete tag by '#autoMembers'
+
+```
+<md-input-container class="full-width">
+    <input mdInput type="text" placeholder="member name" [mdAutocomplete]="autoMembers">
+</md-input-container>
+.....
+
+<md-autocomplete #autoMembers="mdAutocomplete" [displayWith]="displayUser">
+  <md-option *ngFor="let item of items" [value]="item">
+    {{item.name}}
+  </md-option>
+</md-autocomplete>
+.....
+```
+
+Notice that, the 'invite' button is in 'project-item' component, but I hope to let the project-list component deal with the event logic, so I emit the invite click event to 'project-list' component.
+
+firstly , define 'onInviteClick' method in 'project-item; component
+
+```
+ <button md-button type="button" (click)="onInviteClick()">
+    <md-icon>group_add</md-icon>
+    <span>Invite</span>
+</button>
+``` 
+
+and declare the method 
+
+```
+@Output() onInvite = new EventEmitter<void>();
+......
+
+onInviteClick() {
+    this.onInvite.emit();
+    }
+```
+
+the method 'onInvite' will emit to 'project-list' component
+
+```
+<app-project-item *ngFor="let project of projects" 
+                  [item]="project" 
+                  class="card"
+                  (onInvite)="OpenInviteDialog()"> 
+```
+
+at last, it will execute the method 'OpenInviteDialog' in 'project-list' component
+
+```
+OpenInviteDialog() {
+    const dialogRef = this.dialog.open(InviteComponent);
+  }
+```
+
+I just let the 'project-list' as the smart component, which deal with the event logic, and the dump 'project-item' component execute the pure click event.
+
 
 
 
