@@ -335,6 +335,25 @@ and filter some data by pipe and *ngIf
     </span>
 ```
 
+#### Create the new-task component
+
+firstly, I use [mdDatepicker] to bind the button with 'md-datepicker' tag.
+
+```
+...
+<md-input-container class="full-width">
+      <input mdInput [mdDatepicker]="remainderDatepicker" type="text" placeholder="task remainder date">
+      <button type="button" mdSuffix [mdDatepickerToggle]="remainderDatepicker"></button>
+</md-input-container>
+
+<md-datepicker #remainderDatepicker></md-datepicker>
+...
+```
+
+and then transmit the data from 'task-header' component to 'task-home' component, and let the latter one execute the 'openNewTaskDialog' method to open 'new-task' dialog. Here notice, `entryComponents: [NewTaskComponent]`, 'NewTaskComponent' is dialog component, so should put in entryComponents.
+
+
+
 
 
 
