@@ -7,6 +7,9 @@ export const loadSvgResources = (ir: MdIconRegistry, ds: DomSanitizer) => {
     const sidebarDir = `${imgDir}/sidebar`;
     const dayDir = `${imgDir}/days`;
 
+    // import the avatar array
+    const avatarDir = `${imgDir}/avatar`;
+
     ir.addSvgIcon('menu', ds.bypassSecurityTrustResourceUrl(`${imgDir}/menu.svg`));
     ir.addSvgIcon('day', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
     ir.addSvgIcon('month', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/month.svg`));
@@ -19,6 +22,7 @@ export const loadSvgResources = (ir: MdIconRegistry, ds: DomSanitizer) => {
         11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
         21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
     ];
+    days.forEach(day => ir.addSvgIcon(`day${day}`, ds.bypassSecurityTrustResourceUrl(`${dayDir}/day${day}.svg`)));
 
-    days.forEach(day => ir.addSvgIcon(`day${day}`, ds.bypassSecurityTrustResourceUrl(`${dayDir}/day${day}.svg`)))
+    ir.addSvgIconSetInNamespace('avatars', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/avatars.svg`));
 }

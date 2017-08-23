@@ -155,6 +155,29 @@ provide
 ```
 to let the whole project switch each other. Here also notice the data transimit from child 'header' component to parent 'app' component by EventEmmiter().
 
+#### Create the md-grid-list in 'register' page
+
+here I define the 'avatars' array in 'svg.util.ts', and let the register 'md-grid-tile' component import it.
+
+```
+...
+const avatarDir = `${imgDir}/avatar`;
+ir.addSvgIconSetInNamespace('avatars', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/avatars.svg`));
+...
+```
+in 'register.component.html'
+
+```
+<md-grid-list cols="4" rowHeight="1:1">
+    <!-- <md-grid-tile colspan="2">1</md-grid-tile> -->
+    <!-- <md-grid-tile rowspan="2">5</md-grid-tile> -->
+    <md-grid-tile *ngFor="let item of items">
+        <md-icon class="avatar" [svgIcon]="item"></md-icon>
+    </md-grid-tile>
+</md-grid-list>
+```
+
+
 
 
 
