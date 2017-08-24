@@ -3,6 +3,7 @@ import {MdDialog} from '@angular/material';
 import {NewTaskComponent} from '../new-task/new-task.component';
 import {CopyTaskComponent} from '../copy-task/copy-task.component';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {NewTaskListComponent} from '../new-task-list/new-task-list.component';
 
 @Component({
   selector: 'app-task-home',
@@ -148,6 +149,17 @@ export class TaskHomeComponent implements OnInit {
 
   openConfirmDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: 'Delete Task', content: 'are you sure to delete the task?'}});
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  openEditListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'Edit List Name'}});
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+
+  }
+
+  openNewListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'New List'}});
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 }

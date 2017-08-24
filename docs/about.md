@@ -370,7 +370,11 @@ openCopyTaskDialog() {
   }
 ```
 
+#### Create the shared 'confirm-dialog' component
 
+I create the confirm-dialog componnet in the '/shared' directory, and let other different components import it.
+
+and similar as the upon codes, I create the 'new-task-list' component, and let the smart component to execute the logic event.
 
 
 
