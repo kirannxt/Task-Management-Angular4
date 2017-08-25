@@ -1,10 +1,15 @@
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
+import {cardAnimation} from '../../animate/card.animte';
 
 @Component({
   selector: 'app-project-item',
   templateUrl: './project-item.component.html',
-  styleUrls: ['./project-item.component.scss']
+  styleUrls: ['./project-item.component.scss'],
+
+  animations: [
+    cardAnimation
+  ]
 })
 export class ProjectItemComponent implements OnInit {
 
@@ -17,9 +22,23 @@ export class ProjectItemComponent implements OnInit {
 
   @Output() onDelete = new EventEmitter<void>();
 
+
+  // bind '@card' with the 'project-list' component
+  // it means that all the animation control coding only in this file.
+  @HostBinding('@card') cardState = 'out'; 
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.cardState = 'hover';
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.cardState = 'out';
   }
 
   // because the project-item component has the invite button 'add'  <md-icon>group_add</md-icon>, so let it execute the click event,

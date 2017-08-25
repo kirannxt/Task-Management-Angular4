@@ -377,6 +377,90 @@ I create the confirm-dialog componnet in the '/shared' directory, and let other 
 and similar as the upon codes, I create the 'new-task-list' component, and let the smart component to execute the logic event.
 
 
+### Add angular animation module to this projects
+
+In order to realize the components animation style, I add the '@angular/animations' to this project.
+
+#### Add animation with 'project-item' component and 'task-item' component.
+
+
+firstly, create the 'card.animatioin.ts' and 'item.animation.ts' file in directory of 'animate',
+
+```
+import {trigger, state, transition, style, animate, keyframes} from '@angular/animations';
+export const itemAnimation = trigger('item', [
+    state('hover', style({'border-left-width': '8px'})),
+    state('out', style({'border-left-width': '3px'})),
+    transition('out => hover', animate('100ms ease-in')),
+    transition('hover => out', animate('100ms ease-out'))
+]);
+```
+and 
+
+```
+import {trigger, state, transition, style, animate, keyframes} from '@angular/animations';
+export const cardAnimation = trigger('card', [
+    state('out', style({transform: 'scale(1)', 'border-shadow': 'none'})),
+    state('hover', style({transform: 'scale(1.2)', 'border-shadow': '3px 3px 5px 5px #ccc'})),
+    transition('out => hover', animate('100ms ease-in')),
+    transition('hover => out', animate('100ms ease-out'))
+]);
+```
+and then in the 'project-item.component.ts'
+
+```
+import {cardAnimation} from '../../animate/card.animte';
+ animations: [
+    cardAnimation
+  ]
+  ...
+  @HostBinding('@card') cardState = 'out'; 
+  ...
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.cardState = 'hover';
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.cardState = 'out';
+  }
+```
+
+and do nothing in the 'project-item.component.html' file. 
+
+here I use `@HostBinding('@card') cardState = 'out'; `, because the animation style will effect on the whole component, but not the part of it.
+
+while, for the 'task-item' component, I only want to let the left border change width, so I don not '@HostBinding('@card') cardState = 'out'; ', but need add code `[@item]="widerPriority"` in 'task-item.component.html'.
+
+and in 'task-item.component.ts'
+
+```
+import {itemAnimation} from '../../animate/item.animation';
+...
+
+animations: [
+    itemAnimation
+  ]
+....
+
+@HostListener('mouseenter')
+  onMouseEnter() {
+  this.widerPriority = 'hover';
+}
+
+@HostListener('mouseleave')
+    onMouseLeave() {
+    this.widerPriority = 'out';
+}
+
+  ....
+
+```
+
+
+
 
 
 
