@@ -1,4 +1,6 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+
+
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 // import the md-dialog components
 import {MdDialog} from '@angular/material';
@@ -19,7 +21,10 @@ import {listAnimation} from '../../animate/list.animate';
   animations: [
     routingAnimation,
     listAnimation
-  ]
+  ],
+
+  //  mark the 'project-list' as the onpush strategy
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectListComponent implements OnInit {
 
@@ -41,7 +46,7 @@ export class ProjectListComponent implements OnInit {
       "coverImg": 'assets/img/covers/1.jpg'
     }
   ];
-  constructor(private dialog: MdDialog) { }
+  constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -49,7 +54,7 @@ export class ProjectListComponent implements OnInit {
   // open the dedicated component.
   openNewProjectDialog() {
     const dialogRef =  this.dialog.open(NewProjectComponent, {
-      data: {title: 'New Project' }
+      data: {title: 'New Project'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -63,6 +68,10 @@ export class ProjectListComponent implements OnInit {
         {id: 3, name: "new project", desc: "this is the new project", coverImg: 'assets/img/covers/3.jpg'},
         {id: 4, name: "newnew project", desc: "this is the newnew project", coverImg: 'assets/img/covers/6.jpg'}
       ];
+
+      // just check this branch
+      this.cd.markForCheck();
+
     })
   }
 
@@ -79,6 +88,9 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.projects = this.projects.filter((p => p.id !== project.id));
+
+      // just check this branch
+      this.cd.markForCheck();
     });
   }
 

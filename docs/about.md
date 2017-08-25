@@ -546,6 +546,59 @@ export const listAnimation = trigger('list', [
 'query' method is binding with the 'app-project-item' tags, so the 'list.animate.ts' animation will effect on these sub elements.
 
 
+### Modify the whole project
+
+I will continue to modify the whole project,
+
+#### Add DI and changeDetection
+
+in the 'core.module.ts', add the providers (DI), and let others inject it
+
+```
+providers: [
+
+    // this singleton mode
+    {provide: 'BASE_CONFIG', useValue: 'http://localhost:3000'}
+  ]
+```
+
+and the 'app.component.ts' constructor func will inject it
+
+```
+...
+constructor(private oc: OverlayContainer, @Inject('BASE_CONFIG') config) {
+console.log(config);
+...
+```
+
+And then, in order to change the 'changeDetection' strategy, I import the 'ChangeDetectionStrategy' in all the dump components, and import 'ChangeDetectionStrategy' and 'ChangeDetectorRef' in all the smart components.
+
+in dump components, 
+
+```
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+...
+changeDetection: ChangeDetectionStrategy.OnPush
+...
+```
+
+in smart components,
+
+```
+import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+...
+changeDetection: ChangeDetectionStrategy.OnPush,
+...
+
+constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) { }
+...
+
+// just check this branch
+this.cd.markForCheck();
+ ...
+```
+
+
 
 
 

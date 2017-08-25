@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 
 // used for the data trasmission from others
 //  OverlayContainer used to declare the style.
@@ -7,7 +7,10 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 @Component({
   selector: 'app-new-project',
   templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.scss']
+  styleUrls: ['./new-project.component.scss'],
+
+  // for the dump component only add the onpush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewProjectComponent implements OnInit {
 
