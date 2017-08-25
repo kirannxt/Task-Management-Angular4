@@ -38,6 +38,14 @@ import 'hammerjs';
     FooterComponent,
     AppRoutingModule,
     BrowserAnimationsModule
+  ],
+
+
+  //  DI 
+  providers: [
+
+    // this singleton mode
+    {provide: 'BASE_CONFIG', useValue: 'http://localhost:3000'}
   ]
 })
 export class CoreModule {
