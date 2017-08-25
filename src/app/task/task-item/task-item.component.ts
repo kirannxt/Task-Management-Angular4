@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import {itemAnimation} from '../../animate/item.animation';
+import {itemAnimation} from '../../animate/item.animate';
 
 @Component({
   selector: 'app-task-item',

@@ -459,6 +459,92 @@ animations: [
 
 ```
 
+#### Add routing animation
+
+I create the 'router.animate.ts' animationg file
+
+```
+    state('void', style({'position': 'fixed', 'width': '100%', 'height': '80%'})),
+    state('*', style({'position': 'fixed', 'width': '100%', 'height': '80%'})),
+
+    // :enter
+    transition('void => *', [
+        style({transform: 'translateX(-100%)', opacity: 0}),
+        // animate('.5s ease-in-out', style({transform: 'translateX(0)'}))
+
+        //  let one group animation execute together
+        group([
+            animate('.5s ease-in-out', style({transform: 'translateX(0)'})),
+            animate('.3s ease-in', style({opacity: 1}))
+        ])
+    ]),
+
+    // :leave
+    transition('* => void', [
+        style({transform: 'translateX(0)', opacity: 1}),
+        // animate('.5s ease-in-out', style({transform: 'translateX(100%)'}))
+        group([
+            animate('.5s ease-in-out', style({transform: 'translateX(100%)'})),
+            animate('.3s ease-in', style({opacity: 0}))
+        ])
+    ])
+]);
+```
+
+this is used frequently, and notice that, the ':enter' and ':leave' animation has some fixed rule.
+
+and the whole page use router.animate.ts, so must use 
+
+```
+...
+import {routingAnimation} from '../../animate/router.animate';
+...
+animations: [
+    routingAnimation
+  ]
+  ...
+@HostBinding('@routeAnim') state;
+```
+
+in the 'task-home.component.ts' and 'project-list.component.ts' files
+
+
+#### Use 'query' and 'stagger' on list.animate
+
+If use 'query' method, must define the parent elements, which bind with it.
+
+```
+<div class="container" [@list]="projects.length" >
+ <app-project-item *ngFor="let project of projects" 
+    ...
+  </app-project-item>
+</div>
+```
+
+here '<div class="container">' includes some sub elements. 
+
+in 'list.animate.ts'
+
+```
+export const listAnimation = trigger('list', [
+
+    // query the child element, if the query sub element doesnot exist, it needs optional
+    transition('* => *', [
+        query(':enter', style({opacity: 0}), {optional: true}),
+        query(':enter', stagger(300, [
+            animate('1s', style({opacity: 1}))
+        ]), {optional: true}),
+
+        query(':leave', style({opacity: 1}), {optional: true}),
+        query(':leave', stagger(300, [
+            animate('1s', style({opacity: 0}))
+        ]), {optional: true})
+    ])
+    
+]);
+```
+'query' method is binding with the 'app-project-item' tags, so the 'list.animate.ts' animation will effect on these sub elements.
+
 
 
 

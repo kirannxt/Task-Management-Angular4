@@ -1,7 +1,8 @@
 <md-sidenav-container [class.myapp-dark-theme]="dark">
 
     <md-sidenav #sidenav mode="over" align="start">
-        <app-sidebar></app-sidebar>
+        <!-- receive the event from 'sidebar.component' -->
+        <app-sidebar (navClick)="sidenav.toggle()"></app-sidebar>
     </md-sidenav>
 
     <div class="site">

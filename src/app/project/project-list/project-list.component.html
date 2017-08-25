@@ -1,12 +1,18 @@
 
-<app-project-item *ngFor="let project of projects" 
-                  [item]="project" 
-                  class="card"
-                  (onInvite)="OpenInviteDialog()"
-                  (onEdit)="openUpdateDialog()"
-                  (onDelete)="openConfirmDialog()"> 
-  
-</app-project-item>
+<!--  query need to bind with ngFor -->
+<!-- @list bind with the child element length -->
+<div class="container" [@list]="projects.length" >
+
+  <app-project-item *ngFor="let project of projects" 
+    [item]="project" 
+    class="card"
+    (onInvite)="OpenInviteDialog()"
+    (onEdit)="openUpdateDialog()"
+    (onDelete)="openConfirmDialog(project)"> 
+
+  </app-project-item>
+
+</div>
 
 <button md-fab type="button" (click)="openNewProjectDialog()" class="fab-button">
   <md-icon>add</md-icon>

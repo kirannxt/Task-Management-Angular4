@@ -1,7 +1,9 @@
 
 <md-nav-list>
   <h3 md-subheader>Projects</h3>
-  <md-list-item>
+
+  <!-- link router -->
+  <md-list-item [routerLink]="['/projects']" (click)="onNavClick()">
     <md-icon md-list-icon svgIcon="projects"></md-icon>
     <span md-line>Project Homepage</span>
     <span md-line md-subheader>Check All Projects</span>
@@ -9,7 +11,7 @@
 
   <h3 md-subheader>Calendar</h3>
   
-  <md-list-item>
+  <md-list-item [routerLink]="['/tasklists']" (click)="onNavClick()">
       <md-icon md-list-icon svgIcon="month"></md-icon>
       <span md-line>Month View</span>
       <span md-line md-subheader>check tasks by month</span>

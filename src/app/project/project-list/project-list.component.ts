@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 // import the md-dialog components
 import {MdDialog} from '@angular/material';
@@ -8,22 +8,36 @@ import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 
+import {routingAnimation} from '../../animate/router.animate';
+import {listAnimation} from '../../animate/list.animate';
+
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss']
+  styleUrls: ['./project-list.component.scss'],
+
+  animations: [
+    routingAnimation,
+    listAnimation
+  ]
 })
 export class ProjectListComponent implements OnInit {
 
+
+  //  bind the whole component 'project-list'
+  @HostBinding('@routeAnim') state;
+
   projects = [
-    {
-      "name": 'task mg platform',
-      "desc": 'this is a platform',
+    { 
+      "id": 1,
+      "name": 'task mg project',
+      "desc": 'this is a project',
       "coverImg": 'assets/img/covers/0.jpg'
     },
     {
-      "name": 'task mg platform',
-      "desc": 'this is a platform',
+      "id": 2,
+      "name": 'task mg project',
+      "desc": 'this is a project',
       "coverImg": 'assets/img/covers/1.jpg'
     }
   ];
@@ -38,7 +52,18 @@ export class ProjectListComponent implements OnInit {
       data: {title: 'New Project' }
     });
 
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log(result); 
+
+      // [].push()
+      this.projects = [
+        ...this.projects, 
+        // to test stagger
+        {id: 3, name: "new project", desc: "this is the new project", coverImg: 'assets/img/covers/3.jpg'},
+        {id: 4, name: "newnew project", desc: "this is the newnew project", coverImg: 'assets/img/covers/6.jpg'}
+      ];
+    })
   }
 
   OpenInviteDialog() {
@@ -49,9 +74,12 @@ export class ProjectListComponent implements OnInit {
     const dialogRef =  this.dialog.open(NewProjectComponent, {data: {title: 'Edit Project'}});
   }
 
-  openConfirmDialog() {
+  openConfirmDialog(project) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: 'Delete Project', content: 'are you sure to delete this project?'}});
-    dialogRef.afterClosed().subscribe(result => console.log(result));
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.projects = this.projects.filter((p => p.id !== project.id));
+    });
   }
 
 }

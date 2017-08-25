@@ -6,11 +6,14 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {HttpModule} from '@angular/http';
 
+// import the routing module
+import {AppRoutingModule} from '../app-routing.module';
 import {SharedModule} from '../shared/shared.module';
 // import the utils
 import {MdIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from '../utils/svg.util';
+
 
 import 'hammerjs';
 
@@ -19,17 +22,22 @@ import 'hammerjs';
   imports: [
     SharedModule,
     HttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   declarations: [
     HeaderComponent, 
     FooterComponent, 
     SidebarComponent
   ],
+
+  // export the routing module, and let app.module use it
   exports: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ]
 })
 export class CoreModule {
