@@ -1,11 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'theme.scss'; 
 
-// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
-// self-defined theme
-@import 'theme.scss';
-
-// the whole page
 html, body, app-root, md-sidenav-container, .site {
     width: 100%;
     height: 100%;
@@ -13,36 +7,18 @@ html, body, app-root, md-sidenav-container, .site {
 }
 
 .site {
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     flex-direction: column;
-    
 }
 
 main {
-    -ms-flex: 1;
-    -webkit-flex: 1;
     flex: 1;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-// footer
 .fill-remaining-space {
     flex: 1 1 auto;
 }
 
-// login page
 .full-width {
     width: 100%;
 }
-
-
-
-
-

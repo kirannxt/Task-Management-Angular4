@@ -1,10 +1,13 @@
+.material-icon{
+    line-height: 1;
+  }
 
-.fill {
+  .fill{
     flex: 1;
     text-align: center;
-}
+  }
 
-.header-container {
+  .header-container{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -12,8 +15,4 @@
     align-items: center;
     align-content: center;
     width: 100%;
-}
-
-.material-icon {
-    line-height: 1;
-}
+  }
