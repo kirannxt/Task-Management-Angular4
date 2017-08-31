@@ -677,6 +677,20 @@ switch (srcData.tag) {
 ```
 
 
+#### Create 'quick-task' by template driven form
+
+create template form
+
+```
+<md-input-container class="full-width">
+  <input mdInput type="text" placeholder="create new task quickly" [(ngModel)]="desc">
+  <button mdSuffix md-icon-button type="button" (click)="sendQuickTask()"><md-icon>send</md-icon></button>
+</md-input-container>
+
+```
+and use [(ngModel)] to bind the data.
+
+
 
 
 

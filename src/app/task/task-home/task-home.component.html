@@ -26,6 +26,9 @@
             (deleteList)="OpenConfirmDialog()"
             (editList)="OpenEditListDialog()">
         </app-task-header>
+
+        <app-quick-task (quickTask)="handleQuickTask($event)"></app-quick-task>
+
         <app-task-item 
           *ngFor="let task of list.tasks"
           [item]="task"
