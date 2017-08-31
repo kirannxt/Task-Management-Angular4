@@ -1,12 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {CoreModule} from './core/core.module';
-import { AppComponent } from './app.component';
+// import {AppRoutingModule} from './app-routing.module';
+
+import {SharedModule} from './shared/shared.module';
 import {LoginModule} from './login/login.module';
 import {ProjectModule} from './project/project.module';
 import {TaskModule} from './task/task.module';
-import {SharedModule} from './shared/shared.module';
 
+// just load once, 
+import {CoreModule} from './core/core.module';
+
+import { AppComponent } from './app.component';
+// // used for the angular animations
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,9 +22,12 @@ import {SharedModule} from './shared/shared.module';
     BrowserModule,
     CoreModule,
     SharedModule,
+    // MdSidenavModule,
+    // AppRoutingModule,
     LoginModule,
     ProjectModule,
-    TaskModule
+    TaskModule,
+    // BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

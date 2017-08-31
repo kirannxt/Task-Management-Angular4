@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -10,17 +11,27 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class InviteComponent implements OnInit {
 
   items = [
-    {id: 1, name: 'Rick'},
-    {id: 2, name: 'Leo'},
-    {id: 3, name: 'Claire'}
+    {
+      id: 1,
+      name: 'Rick'
+    },
+    {
+      id: 2,
+      name: 'Leo'
+    },
+    {
+      id: 3,
+      name: 'Huang'
+    }
   ]
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  displayUser(user: {id: string, name: string}) {
-    return user ? user.name : "";  
+  displayUser(user: {id: string; name: string}) {
+    return user ? user.name : '';
   }
 
 }

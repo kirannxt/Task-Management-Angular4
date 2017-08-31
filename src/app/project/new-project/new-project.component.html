@@ -1,14 +1,16 @@
 
 <form>
-  <h2 md-dialog-title>{{title}}</h2>
+  <h2 md-diaglog-title>{{title}}</h2>
+
   <div md-dialog-content>
     <md-input-container class="full-width">
-      <input mdInput type="text" placeholder="project name">
+      <input mdInput type="text" placeholder="Project Name">
     </md-input-container>
-    <md-input-container>
-      <input mdInput type="text" placeholder="project description">
+    <md-input-container class="full-width">
+      <input mdInput type="text" placeholder="Project Desciption">
     </md-input-container>
   </div>
+  
 
   <div md-dialog-actions>
     <button type="button" md-raised-button color="primary" (click)="onClick()">Save</button>

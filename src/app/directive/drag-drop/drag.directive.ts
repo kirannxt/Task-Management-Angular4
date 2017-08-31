@@ -1,20 +1,23 @@
 
-import { Directive, HostListener, ElementRef, Renderer2, Input } from '@angular/core';
+import { Directive, HostListener, Input, ElementRef, Renderer2 } from '@angular/core';
+
 import {DragDropService} from '../drag-drop.service';
 
+
 @Directive({
+  // app-draggable and draggedClass will be inputed by the target element
   selector: '[app-draggable][draggedClass][dragTag][dragData]'
 })
 export class DragDirective {
 
-
   private _isDraggable = false;
 
-  
   @Input('app-draggable')
-  set isDraggable(val: boolean) {
-    this._isDraggable = val;
-    this.rd.setAttribute(this.el.nativeElement, 'draggable', `${val}`);
+
+  // let the target element become draggable or not, need to set attribute
+  set isDraggable(value: boolean) {
+    this._isDraggable = value;
+    this.rd.setAttribute(this.el.nativeElement, 'draggable', `${value}`);
   }
 
   get isDraggable() {
@@ -24,20 +27,23 @@ export class DragDirective {
 
   @Input() draggedClass: string;
 
-  // add service
+  // define the identified tag
   @Input() dragTag: string;
   @Input() dragData: any;
 
   constructor(
+
+    // el and rd used for control the dom element
     private el: ElementRef, 
     private rd: Renderer2, 
-    private service: DragDropService
-  ) { }
+    private service: DragDropService) { }
 
   @HostListener('dragstart', ['$event'])
-  onDragStart(ev: Event) {
-    if (this.el.nativeElement === ev.target) {
+  ondragStart(ev: Event) {
+    if(this.el.nativeElement === ev.target) {
       this.rd.addClass(this.el.nativeElement, this.draggedClass);
+
+      // when dragstart it will transmit the data
       this.service.setDragData({tag: this.dragTag, data: this.dragData});
     }
   }
@@ -48,5 +54,6 @@ export class DragDirective {
       this.rd.removeClass(this.el.nativeElement, this.draggedClass);
     }
   }
+
 
 }

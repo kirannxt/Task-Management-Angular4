@@ -1,17 +1,19 @@
 
-import { MdIconRegistry } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
+
+// create the self-defined icon
+import {MdIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 
 export const loadSvgResources = (ir: MdIconRegistry, ds: DomSanitizer) => {
+
     const imgDir = 'assets/img';
     const sidebarDir = `${imgDir}/sidebar`;
     const dayDir = `${imgDir}/days`;
 
-    const iconDir = `${imgDir}/icons`;
-
-    // import the avatar array
     const avatarDir = `${imgDir}/avatar`;
 
+    const iconDir = `${imgDir}/icons`;
+    
     ir.addSvgIcon('menu', ds.bypassSecurityTrustResourceUrl(`${imgDir}/menu.svg`));
     ir.addSvgIcon('day', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
     ir.addSvgIcon('month', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/month.svg`));
@@ -21,17 +23,16 @@ export const loadSvgResources = (ir: MdIconRegistry, ds: DomSanitizer) => {
 
     ir.addSvgIcon('move', ds.bypassSecurityTrustResourceUrl(`${iconDir}/move.svg`));
     ir.addSvgIcon('add', ds.bypassSecurityTrustResourceUrl(`${iconDir}/add.svg`));
-    ir.addSvgIcon('delete', ds.bypassSecurityTrustResourceUrl(`${iconDir}/delete.svg`));
+    ir.addSvgIcon('delete', ds.bypassSecurityTrustResourceUrl(`${iconDir}/elete.svg`));
 
+    // deal with the special svg file, which composes multiple icons
+    ir.addSvgIconSetInNamespace('avatars', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/avatars.svg`));
     ir.addSvgIcon('unassigned', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/unassigned.svg`));
-    
 
     const days = [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+        11, 12, 13,14, 15, 16, 17, 18, 19, 20,
+        21,22,23,24, 25, 26, 27, 28, 29, 30, 31
     ];
-    days.forEach(day => ir.addSvgIcon(`day${day}`, ds.bypassSecurityTrustResourceUrl(`${dayDir}/day${day}.svg`)));
-
-    ir.addSvgIconSetInNamespace('avatars', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/avatars.svg`));
-}
+    days.forEach( d => ir.addSvgIcon(`day${d}`, ds.bypassSecurityTrustResourceUrl(`${dayDir}/day${d}.svg`)));
+};

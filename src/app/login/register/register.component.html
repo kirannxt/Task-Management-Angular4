@@ -1,52 +1,46 @@
 
-
 <form>
+
   <md-card>
     <md-card-header>
       <md-card-title>Register: </md-card-title>
     </md-card-header>
-    
+
     <md-card-content>
-      <md-input-container class="full-width" color="primary" floatPlaceholder="float">
-        <!-- <span mdPrefix>Rick</span> -->
-        <input mdInput type="text" placeholder="your email">
-        <span mdSuffix>@gmail.com</span>
-        <!-- <md-hint>Required</md-hint> -->
-        
+      <md-input-container class="full-width">
+        <input mdInput type="text" placeholder="Your email">
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput type="text" placeholder="Your name">
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput type="text" placeholder="input password">
+      </md-input-container>
+      <md-input-container class="full-width">
+        <input mdInput type="text" placeholder="confirm password">
       </md-input-container>
 
-      <md-input-container class="full-width" color="primary" floatPlaceholder="float">
-        <input mdInput type="password" placeholder="your name">
-      </md-input-container>
-  
-      <md-input-container class="full-width" color="primary" floatPlaceholder="float">
-        <input mdInput type="password" placeholder="your password">
-      </md-input-container>
-
-      <md-input-container class="full-width" color="primary" floatPlaceholder="float">
-        <input mdInput type="password" placeholder="confirm your password">
-      </md-input-container>
-
-      <md-grid-list cols="4" rowHeight="1:1">
+      <!-- used for the avatar -->
+      <md-grid-list cols="6">
         <!-- <md-grid-tile colspan="2">1</md-grid-tile> -->
-        <!-- <md-grid-tile rowspan="2">5</md-grid-tile> -->
+
+        <!-- loop the whole arrays -->
         <md-grid-tile *ngFor="let item of items">
+          <!-- svgIcon is the variable -->
           <md-icon class="avatar" [svgIcon]="item"></md-icon>
         </md-grid-tile>
+        
+          
       </md-grid-list>
-  
-      <button md-raised-button type="button" color="primary">Register</button>
-  
+
+      <button md-raised-button color="primary" type="button">Register</button>
+
     </md-card-content>
-    
-    <md-card-actions class="text-right">
-      <p>No Login? <a href="">Login</a></p>
-      <p>Loss Password? <a href="">Get Back</a></p>
+      <p>Have Account?<a href="">Login</a></p>
+      <p>Forget Password? <a href="">Get Back</a></p>
+    <md-card-actions>
+
     </md-card-actions>
-      
   </md-card>
-
-
-  
 
 </form>

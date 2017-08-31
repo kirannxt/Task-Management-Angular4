@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import {SharedModule} from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
-import { SharedModule } from '../shared/shared.module';
 import {LoginRoutingModule} from './login-routing.module';
 import { RegisterComponent } from './register/register.component';
 
@@ -9,6 +9,9 @@ import { RegisterComponent } from './register/register.component';
     SharedModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterComponent]
+  declarations: [
+    LoginComponent, 
+    RegisterComponent
+  ]
 })
 export class LoginModule { }

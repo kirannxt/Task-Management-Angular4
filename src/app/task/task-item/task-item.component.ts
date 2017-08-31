@@ -1,5 +1,6 @@
+
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ChangeDetectionStrategy } from '@angular/core';
-import {itemAnimation} from '../../animate/item.animate';
+import {itemAnimation} from '../../animation/item.animation';
 
 @Component({
   selector: 'app-task-item',
@@ -8,20 +9,19 @@ import {itemAnimation} from '../../animate/item.animate';
 
   changeDetection: ChangeDetectionStrategy.OnPush,
 
+  // define the animation 
   animations: [
     itemAnimation
   ]
-
 })
 export class TaskItemComponent implements OnInit {
 
   @Input() item;
-
   @Input() avatar;
 
   @Output() taskClick = new EventEmitter<void>();
 
-  private widerPriority = 'out';
+  widerPriority = 'out';
 
   constructor() { }
 
@@ -33,19 +33,19 @@ export class TaskItemComponent implements OnInit {
     this.taskClick.emit();
   }
 
-  onCheckboxClick(ev: Event) {
+  onCheckBoxClick(ev: Event) {
+    // avoid the event propagate to outside
     ev.stopPropagation();
   }
 
   @HostListener('mouseenter')
   onMouseEnter() {
-    this.widerPriority = 'hover';
+    this.widerPriority = 'in';
   }
 
   @HostListener('mouseleave')
-  onMouseLeave() {
+  onmouseleave() {
     this.widerPriority = 'out';
   }
-
 
 }

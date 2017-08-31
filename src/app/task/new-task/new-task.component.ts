@@ -1,5 +1,7 @@
+
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
-import {MD_DIALOG_DATA} from '@angular/material';
+import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.component.html',
@@ -11,22 +13,22 @@ export class NewTaskComponent implements OnInit {
 
   title = '';
 
-  priorities = [
+  private priorities = [
     {
-      label: 'Emergency',
+      label: 'emergency',
       value: 1
     },
     {
-      label: 'Important',
+      label: 'important',
       value: 2
     },
     {
-      label: 'Normal',
+      label: 'normal',
       value: 3
     }
-  ];
+  ]
 
-  constructor(@Inject(MD_DIALOG_DATA) private data ) { }
+  constructor(@Inject(MD_DIALOG_DATA) private data) { }
 
   ngOnInit() {
     this.title = this.data.title;

@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 
@@ -12,7 +13,10 @@ export class NewTaskListComponent implements OnInit {
 
   title = '';
 
-  constructor(@Inject(MD_DIALOG_DATA) private data, private dialogRef: MdDialogRef<NewTaskListComponent>) { }
+  // this is the common use for dialog component, if need to import the data, using inject, if want to export the data, using dialogRef
+  constructor(
+    @Inject(MD_DIALOG_DATA) private data, 
+    private dialogRef: MdDialogRef<NewTaskListComponent>) { }
 
   ngOnInit() {
     this.title = this.data.title;

@@ -1,6 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {MdIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -10,8 +8,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class HeaderComponent implements OnInit {
 
+  // it used for change the sidebar spread in the app.html
   @Output() toggle = new EventEmitter<void>();
-  @Output() toggleDarkTheme = new EventEmitter<boolean>();
+
+  // it used for change the whole page theme change
+  @Output() toggleDarkTheme = new EventEmitter<Boolean>();
 
   constructor() { 
     
@@ -20,11 +21,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  openSidebar() {
+  // becausee header does not know the sidebar info, so I use Ouput() and emmit outside
+  openSideBar() {
     this.toggle.emit();
   }
-  
-  // emmit the event to app
+
+  // let the whole project know that.
   onChange(checked: boolean) {
     this.toggleDarkTheme.emit(checked);
   }

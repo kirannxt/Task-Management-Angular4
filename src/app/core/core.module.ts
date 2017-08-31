@@ -1,28 +1,29 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import {HttpModule} from '@angular/http';
 
-// import the routing module
-import {AppRoutingModule} from '../app-routing.module';
-import {SharedModule} from '../shared/shared.module';
-// import the utils
 import {MdIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from '../utils/svg.util';
 
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
-import 'hammerjs';
+import {SharedModule} from '../shared/shared.module';
+
+import {AppRoutingModule} from '../app-routing.module';
+// used for the angular animations
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import 'rxjs/add/operator/take';
 
- 
+import 'hammerjs';
+
 @NgModule({
   imports: [
-    SharedModule,
     HttpModule,
+    SharedModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],
@@ -31,8 +32,6 @@ import 'rxjs/add/operator/take';
     FooterComponent, 
     SidebarComponent
   ],
-
-  // export the routing module, and let app.module use it
   exports: [
     HeaderComponent,
     SidebarComponent,
@@ -41,24 +40,25 @@ import 'rxjs/add/operator/take';
     BrowserAnimationsModule
   ],
 
-
-  //  DI 
+  // provides the DI with string value
   providers: [
-
-    // this singleton mode
     {provide: 'BASE_CONFIG', useValue: 'http://localhost:3000'}
   ]
-})
-export class CoreModule {
 
-  // core module only needs to be loaded once, import SkipSelf
-  // first load import the Optional
-  constructor(@Optional() @SkipSelf() parent: CoreModule, 
-                                      ir: MdIconRegistry,
-                                      ds: DomSanitizer) {
+})
+export class CoreModule { 
+
+  // @skipSelf --- search the parent firstly. @Optional() --- if not exist, just load from its parent.
+  constructor(
+    @Optional() @SkipSelf() parent: CoreModule,
+    ir: MdIconRegistry,
+    ds: DomSanitizer) {  // DI: parent
+
+    // just need it load once
     if (parent) {
-      throw Error('module existed, cannot load again');
+      throw new Error('core module has existed, cannot laod again');
     }
+    // just load once in the whole project.
     loadSvgResources(ir, ds);
   }
- }
+}

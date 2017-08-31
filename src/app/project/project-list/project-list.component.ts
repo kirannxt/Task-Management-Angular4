@@ -1,95 +1,89 @@
 
 
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+// for the smart component, need ChangeDetectionStrategy, ChangeDetectorRef to do changedetection
+import { Component, OnInit, HostBinding, HostListener, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
-// import the md-dialog components
 import {MdDialog} from '@angular/material';
-
-// import the new project dialog component
 import {NewProjectComponent} from '../new-project/new-project.component';
 import {InviteComponent} from '../invite/invite.component';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 
-import {routingAnimation} from '../../animate/router.animate';
-import {listAnimation} from '../../animate/list.animate';
+import {routerAnimation} from '../../animation/router.animation';
+import {listAnimation} from '../../animation/list.animation';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
-
   animations: [
-    routingAnimation,
+    routerAnimation,
     listAnimation
   ],
 
-  //  mark the 'project-list' as the onpush strategy
+  // tell the component to execute the opPush strategy
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectListComponent implements OnInit {
 
-
-  //  bind the whole component 'project-list'
-  @HostBinding('@routeAnim') state;
+  // bind the router animation with the whole component,
+  @HostBinding('@routerAnim') state;
 
   projects = [
-    { 
+    {
       "id": 1,
-      "name": 'task mg project',
-      "desc": 'this is a project',
+      "name": 'task management platform',
+      "desc": 'this is one task management platform',
       "coverImg": 'assets/img/covers/0.jpg'
     },
     {
       "id": 2,
-      "name": 'task mg project',
-      "desc": 'this is a project',
+      "name": ' new task management platform',
+      "desc": 'this is new task management platform',
       "coverImg": 'assets/img/covers/1.jpg'
     }
-  ];
-  constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) { }
+  ]
+
+  // 1. inject cd: ChangeDetectorRef
+  constructor(private diaglog: MdDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
 
-  // open the dedicated component.
+  // click to open the new project dialog, this dialog is put in the entryComponents.
   openNewProjectDialog() {
-    const dialogRef =  this.dialog.open(NewProjectComponent, {
-      data: {title: 'New Project'}
-    });
+    // open the newProjectComponent and send data to the new component
+    const dialogRef = this.diaglog.open(NewProjectComponent, {data: {title: 'New Project'}});
 
+    // the dislogref will receive the data from another one.
     dialogRef.afterClosed().subscribe(result => {
 
-      console.log(result); 
-
-      // [].push()
-      this.projects = [
-        ...this.projects, 
-        // to test stagger
-        {id: 3, name: "new project", desc: "this is the new project", coverImg: 'assets/img/covers/3.jpg'},
-        {id: 4, name: "newnew project", desc: "this is the newnew project", coverImg: 'assets/img/covers/6.jpg'}
+      // push the project to the array
+      this.projects =[...this.projects, 
+        {id: 3, name: 'New Project', desc: 'this is new project', coverImg: 'assets/img/covers/3.jpg'},
+        {id: 4, name: 'NewNew Project', desc: 'this is newnew project', coverImg: 'assets/img/covers/4.jpg'}
       ];
 
-      // just check this branch
+      // 2. tell the component that only execute this branch by markforcheck
       this.cd.markForCheck();
-
-    })
+    });
   }
 
   OpenInviteDialog() {
-    const dialogRef = this.dialog.open(InviteComponent);
+    const dialogRef = this.diaglog.open(InviteComponent);
+    
   }
 
-  openUpdateDialog() {
-    const dialogRef =  this.dialog.open(NewProjectComponent, {data: {title: 'Edit Project'}});
+  OpenUpdateDialog() {
+    const dialogRef = this.diaglog.open(NewProjectComponent, {data: {title: 'Edit Project'}});
   }
 
-  openConfirmDialog(project) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: 'Delete Project', content: 'are you sure to delete this project?'}});
+  OpenConfirmDialog(project) {
+    const dialogRef = this.diaglog.open(ConfirmDialogComponent, {data: {title: 'Delete Project', content: 'Are you sure delete this project?'}});
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.projects = this.projects.filter((p => p.id !== project.id));
+      this.projects = this.projects.filter(p => p.id !== project.id);
 
-      // just check this branch
+      // same as 2.tell the component that only execute this branch by markforcheck
       this.cd.markForCheck();
     });
   }

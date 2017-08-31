@@ -598,6 +598,52 @@ this.cd.markForCheck();
  ...
 ```
 
+#### Create drag and drop directive and service
+
+Firstly, it provides the service 'drag-drop.service.ts' to let the directives import.
+
+```
+export interface DragData {
+    ......
+}
+
+@Injectable()
+export class DragDropService {
+    .....
+}
+
+``` 
+
+Secondly, in the 'drag.directive.ts', I output some properties: `selector: '[app-draggable][draggedClass][dragTag][dragData]'`, and the 'task-item' will add these attributes 
+
+```
+...
+[app-draggable]="true"
+[draggedClass]="'drag-start'"
+[dragTag]="'task-item'"
+[dragData]="item"
+......
+```
+
+Similarly, in the 'drop.directive.ts', I output some properties: `selector: '[app-droppable][dropTags][dragEnterClass]'`, and the 'task-home' component will add these attributes
+
+```
+......
+app-droppable
+[dropTags]="['task-item', 'task-list']"
+[app-draggable]="true"
+[dragTag]="'task-list'"
+[draggedClass]="'drag-start'"
+[dragData]="list"
+[dragEnterClass]="'drag-enter'"
+(dropped)="handleMove($event, list)"
+......
+```
+
+The purpose of directive is to let the target component (element) add some attributes.
+
+
+
 
 
 

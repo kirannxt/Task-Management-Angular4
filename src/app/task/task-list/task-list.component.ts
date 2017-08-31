@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -12,7 +13,6 @@ export class TaskListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('app-task-list');
   }
 
 }

@@ -1,7 +1,3 @@
-md-card {
-    height: 20em;
-    flex: 0 0 20em;
-}
 
 form {
     display: flex;
@@ -12,8 +8,16 @@ form {
     height: 100%;
 }
 
+md-card {
+    height: 20em;
+    flex: 0 0 20em
+}
+
+.full-width {
+    width: 100%;
+}
+
 .text-right {
     margin: 10px;
     text-align: end;
 }
-

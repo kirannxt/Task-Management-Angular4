@@ -1,13 +1,16 @@
 
 
 <form>
-  <h2 md-dialog-title>Invite Member</h2>
+  <h2 md-diaglog-title>Invite Member:</h2>
+
   <div md-dialog-content>
     <md-input-container class="full-width">
-      <input mdInput type="text" placeholder="member name" [mdAutocomplete]="autoMembers">
+  
+      <!-- is similar as [mdDatepickerToggle] in new-task component and [mdMenuTriggerFor] in task-header component -->
+      <input mdInput type="text" placeholder="Member Name" [mdAutocomplete]="autoMembers">
     </md-input-container>
-
   </div>
+  
 
   <div md-dialog-actions>
     <button type="button" md-raised-button color="primary" (click)="onClick()">Save</button>

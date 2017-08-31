@@ -1,10 +1,9 @@
-// this module only used to provide one single port.
 
+// shared module is used for puting the shared modules and export together, and other smart module just import once.
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DirectiveModule } from '../directive/directive.module';
-
+import {DirectiveModule} from '../directive/directive.module';
 import {
   MdToolbarModule, 
   MdIconModule, 
@@ -19,13 +18,12 @@ import {
   MdMenuModule,
   MdCheckboxModule,
   MdTooltipModule,
-  MdDatepickerModule,
   MdRadioModule,
+  MdDatepickerModule,
   MdNativeDateModule,
   MdSelectModule,
   MdSidenavModule
 } from '@angular/material';
-
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
@@ -44,13 +42,14 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdMenuModule,
     MdCheckboxModule,
     MdTooltipModule,
-    MdDatepickerModule,
     MdRadioModule,
+    MdDatepickerModule,
     MdNativeDateModule,
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule
   ],
+  declarations: [ConfirmDialogComponent],
   exports: [
     CommonModule,
     MdToolbarModule, 
@@ -66,14 +65,13 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdMenuModule,
     MdCheckboxModule,
     MdTooltipModule,
-    MdDatepickerModule,
     MdRadioModule,
+    MdDatepickerModule,
     MdNativeDateModule,
     MdSelectModule,
     MdSidenavModule,
     DirectiveModule
   ],
-  declarations: [ConfirmDialogComponent],
   entryComponents: [ConfirmDialogComponent]
 })
 export class SharedModule { }

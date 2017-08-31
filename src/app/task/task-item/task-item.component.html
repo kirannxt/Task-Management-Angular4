@@ -1,30 +1,45 @@
 
+
+<!-- ngClass bind with the {className: boolean expression} -->
+<!-- [@item] = widerPriority is similar as @HostBinding('@card') cardState = 'out'; in project.item, b
+but here only animate one part of component--> 
+
+<!-- [app-draggable] [draggedClass] will transfer(input) to the drag directive, and let directive define the rule,  -->
 <md-list-item class="container" 
-
+              
               [@item]="widerPriority"
-
+              
               [ngClass]="{
-                    'priority-normal': item.priority === 3,
-                    'priority-important': item.priority === 2,
-                    'priority-emergency': item.priority === 1
-                  }"
+                'priority-normal': item.priority === 3,
+                'priority-important': item.priority === 2,
+                'priority-emergency': item.priority === 1
+              }"
+              (click)="onItemClick()"
 
-
+              
               [app-draggable]="true"
-              [dragTag]="'task-item'"
               [draggedClass]="'drag-start'"
-              [dragData]="item"
-              (click)="onItemClick()">
+              [dragTag]="'task-item'"
+              [dragData]="item">
 
-  <md-checkbox class="completion-status" [checked]="item.completed" (click)="onCheckboxClick($event)"></md-checkbox>
+<!-- similar as the checkbox in html type -->
+  <md-checkbox 
+      [checked]="item.completed" 
+      class="completion-status"
+      (click)="onCheckBoxClick($event)"
+      ></md-checkbox>
+  <!-- use [ngClass] to verify the boolean value of item.completed -->
   <div md-line class="content" [ngClass]="{'completed': item.completed}">
+    
     <span [md-tooltip]="item.desc">{{item.desc}}</span>
   </div>
   <div md-line class="bottom-bar">
     <span class="due-date" *ngIf="item.dueDate">
-      {{item.dueDate | date: "dd/MM/yy"}}
+      <!-- pipe for filter -->
+      {{item.dueDate | date: 'dd/MM/yy'}}
     </span>
-    <md-icon *ngIf="item.remainder">alarm</md-icon>
+    <md-icon *ngIf="item.remind">alarm</md-icon>
   </div>
+  <!--  -->
   <md-icon [svgIcon]="avatar" md-list-avatar class="avatar"></md-icon>
 </md-list-item>

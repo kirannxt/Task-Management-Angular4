@@ -1,9 +1,12 @@
 
+
 <form>
-  <h3 md-dialog-title>{{title}}</h3>
+  <h2 md-diaglog-title>{{title}}</h2>
+
   <div md-dialog-content>
+
     <md-input-container class="full-width">
-      <input mdInput type="text" placeholder="task content">
+      <input mdInput type="text" placeholder="Task Name">
     </md-input-container>
     
     <md-radio-group>
@@ -11,22 +14,32 @@
         {{priority.label}}
       </md-radio-button>
     </md-radio-group>
-
+  
     <md-input-container class="full-width">
-      <input mdInput [mdDatepicker]="dueDatepicker" type="text" placeholder="task due date">
+  
+      <input mdInput [mdDatepicker]="dueDatepicker" type="text" placeholder="Due Date">
+  
       <button type="button" mdSuffix [mdDatepickerToggle]="dueDatepicker"></button>
+  
     </md-input-container>
-
+  
     <md-datepicker #dueDatepicker></md-datepicker>
-
+  
+  
     <md-input-container class="full-width">
-      <input mdInput [mdDatepicker]="remainderDatepicker" type="text" placeholder="task remainder date">
-      <button type="button" mdSuffix [mdDatepickerToggle]="remainderDatepicker"></button>
+        
+      <input mdInput [mdDatepicker]="remindDatepicker" type="text" placeholder="Remind Date">
+  
+      <!-- is similar as [mdMenuTriggerFor] in task-header component and [mdAutocomplete] in invite component -->
+      <button type="button" mdSuffix [mdDatepickerToggle]="remindDatepicker"></button>
+  
     </md-input-container>
-
-    <md-datepicker #remainderDatepicker></md-datepicker>
+  
+    <md-datepicker #remindDatepicker></md-datepicker>
 
   </div>
+
+  
 
   <div md-dialog-actions>
     <button type="button" md-raised-button color="primary" (click)="onClick()">Save</button>

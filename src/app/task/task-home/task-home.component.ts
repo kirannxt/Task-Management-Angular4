@@ -1,38 +1,32 @@
+
 import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {NewTaskComponent} from '../new-task/new-task.component';
 import {CopyTaskComponent} from '../copy-task/copy-task.component';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 import {NewTaskListComponent} from '../new-task-list/new-task-list.component';
-
-import {routingAnimation} from '../../animate/router.animate';
+import {routerAnimation} from '../../animation/router.animation';
 
 @Component({
   selector: 'app-task-home',
   templateUrl: './task-home.component.html',
   styleUrls: ['./task-home.component.scss'],
-
-  // changedetection strategy
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
   animations: [
-    routingAnimation
-  ]
+    routerAnimation
+  ],
+
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskHomeComponent implements OnInit {
 
-
-  // mock the data
   lists = [
-
     {
       id: 1,
-      name: 'Ready',
+      name: 'READY',
       tasks: [
-
         {
           id: 1,
-          desc: 'task one: buy coffee',
+          desc: 'ready one',
           completed: true,
           priority: 3,
           owner: {
@@ -41,152 +35,106 @@ export class TaskHomeComponent implements OnInit {
             avatar: 'avatars:svg-11'
           },
           dueDate: new Date(),
-          remainder: new Date()
-    
+          remind: new Date()
         },
-
         {
           id: 2,
-          desc: 'task two: reday homework',
+          desc: 'ready two',
           completed: false,
           priority: 2,
           owner: {
             id: 1,
-            name: 'leo',
+            name: 'huang',
             avatar: 'avatars:svg-12'
           },
           dueDate: new Date()
-    
         }
-
+        
       ]
     },
-
     {
       id: 2,
-      name: 'In process',
+      name: 'IN PROCESS',
       tasks: [
-
         {
           id: 1,
-          desc: 'task three: verify the project',
+          desc: 'process one',
           completed: false,
+          priority: 3,
+          owner: {
+            id: 1,
+            name: 'rick',
+            avatar: 'avatars:svg-13'
+          },
+          dueDate: new Date()
+        },
+        {
+          id: 2,
+          desc: 'process two',
+          completed: true,
           priority: 1,
           owner: {
             id: 1,
-            name: 'liyue',
-            avatar: 'avatars:svg-13'
-          },
-          dueDate: new Date(),
-          remainder: new Date()
-    
-        },
-
-        {
-          id: 2,
-          desc: 'task four: design plan',
-          completed: false,
-          priority: 3,
-          owner: {
-            id: 1,
-            name: 'claire',
+            name: 'huang',
             avatar: 'avatars:svg-14'
           },
           dueDate: new Date(),
-          remainder: new Date()
-    
+          remind: new Date()
         }
-
-      ]
-    },
-
-    {
-      id: 3,
-      name: 'Complete',
-      tasks: [
-
-        {
-          id: 1,
-          desc: 'task five: complete plan',
-          completed: true,
-          priority: 2,
-          owner: {
-            id: 1,
-            name: 'aj',
-            avatar: 'avatars:svg-15'
-          },
-          dueDate: new Date()
-    
-        },
-
-        {
-          id: 2,
-          desc: 'task six: complete homework',
-          completed: true,
-          priority: 3,
-          owner: {
-            id: 1,
-            name: 'amahli',
-            avatar: 'avatars:svg-16'
-          },
-          dueDate: new Date()
-    
-        }
-
+        
       ]
     }
+  ]
 
-    
-  ];
+  // binding the router animation with the whole component.
+  @HostBinding('@routerAnim') state;
 
-  @HostBinding('@routeAnim') state;
-
+  // dialog used to open the dialog component
   constructor(private dialog: MdDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
 
-  openNewTaskDialog() {
+  OpenNewTaskDialog() {
     const dialogRef = this.dialog.open(NewTaskComponent, {data: {title: 'New Task'}});
   }
 
-  openCopyTaskDialog() {
-    const dialogRef = this.dialog.open(CopyTaskComponent, {data: {lists: this.lists}});
+  OpenCopyTaskDialog() {
+    // this click event is transmit from the task-header, and will send the data to CopyTaskComponent.
+    const dialogRef =  this.dialog.open(CopyTaskComponent, {data: {lists: this.lists}});
   }
 
   OpenUpdateTaskDialog(task) {
-    const dialogRef = this.dialog.open(NewTaskComponent, {data: {title: 'Modify Task', task: task}});
+    const dialogRef = this.dialog.open(NewTaskComponent, {data: {title: 'Modify Task', task: task}})
   }
 
-  openConfirmDialog() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: 'Delete Task', content: 'are you sure to delete the task?'}});
+  OpenConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: {title: "Delete List", content: "Are you sure to delete the list?"}});
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 
-  openEditListDialog() {
-    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'Edit List Name'}});
-    dialogRef.afterClosed().subscribe(result => console.log(result));
-
-  }
-
-  openNewListDialog() {
-    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'New List'}});
+  OpenEditListDialog() {
+    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'Modify List Name'}});
     dialogRef.afterClosed().subscribe(result => console.log(result));
   }
 
+  OpenNewListDialog() {
+    // will transfer the data.
+    const dialogRef = this.dialog.open(NewTaskListComponent, {data: {title: 'New Task List'}});
+    dialogRef.afterClosed().subscribe(result => console.log(result));
+  }
 
   handleMove(srcData, list) {
-    switch(srcData.tag) {
-      case 'task-item':
+    switch (srcData.tag) {
+      case 'task-item': 
         console.log('handling item');
         break;
-
       case 'task-list':
-        console.log('handling list');
+        console.log('handle list');
         break;
-
       default:
         break;
     }
   }
+
 }

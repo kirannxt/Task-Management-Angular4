@@ -13,14 +13,14 @@ import {ProjectRoutingModule} from './project-routing.module';
   ],
   declarations: [
     ProjectListComponent, 
-    ProjectItemComponent,
+    ProjectItemComponent, 
     NewProjectComponent, 
     InviteComponent
   ],
 
-  // dialog component needs to be put in the entryComponents
+  // the dialog component should put in the entryComponents
   entryComponents: [
-    NewProjectComponent, 
+    NewProjectComponent,
     InviteComponent
   ]
 })

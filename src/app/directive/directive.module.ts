@@ -4,17 +4,15 @@ import { DropDirective } from './drag-drop/drop.directive';
 import {DragDropService} from './drag-drop.service';
 
 @NgModule({
-  
+  imports: [],
   declarations: [
     DragDirective, 
     DropDirective
   ],
-
   exports: [
     DragDirective, 
     DropDirective
   ],
-
   providers: [
     DragDropService
   ]
