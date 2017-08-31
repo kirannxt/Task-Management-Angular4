@@ -1,5 +1,5 @@
 
-<form>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm, $event)">
 
   <md-card>
     <md-card-header>
@@ -8,32 +8,36 @@
 
     <md-card-content>
       <md-input-container class="full-width">
-        <input mdInput type="text" placeholder="Your email">
+        <input mdInput type="text" placeholder="Your email" formControlName="email">
       </md-input-container>
       <md-input-container class="full-width">
-        <input mdInput type="text" placeholder="Your name">
+        <input mdInput type="text" placeholder="Your name" formControlName="name"> 
       </md-input-container>
       <md-input-container class="full-width">
-        <input mdInput type="text" placeholder="input password">
+        <input mdInput type="text" placeholder="input password" formControlName="password">
       </md-input-container>
       <md-input-container class="full-width">
-        <input mdInput type="text" placeholder="confirm password">
+        <input mdInput type="text" placeholder="confirm password" formControlName="confirmpassword">
       </md-input-container>
 
+      
       <!-- used for the avatar -->
-      <md-grid-list cols="6">
-        <!-- <md-grid-tile colspan="2">1</md-grid-tile> -->
-
-        <!-- loop the whole arrays -->
+      <!-- <md-grid-list cols="6">
         <md-grid-tile *ngFor="let item of items">
-          <!-- svgIcon is the variable -->
+          
           <md-icon class="avatar" [svgIcon]="item"></md-icon>
         </md-grid-tile>
-        
-          
-      </md-grid-list>
+      </md-grid-list> -->
 
-      <button md-raised-button color="primary" type="button">Register</button>
+      <!-- will use the image-list-select form -->
+      <app-image-list-select
+        [useSvgIcon]="true"
+        [cols]="6"
+        [title]="'Choose Icon'"
+        [items]="items"
+        formControlName="avatar"></app-image-list-select>
+
+      <button md-raised-button color="primary" type="submit">Register</button>
 
     </md-card-content>
       <p>Have Account?<a href="">Login</a></p>

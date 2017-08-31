@@ -744,6 +744,23 @@ validate(fc: FormControl): {[key: string]: any} {
 
 The model driven form used to deal with some complex form.
 
+#### Create the self-defined form 'image-list-select' component, and let other forms use it.
+
+I create the self-defined form, and import it in 'register' form
+
+```
+......
+
+<app-image-list-select
+        [useSvgIcon]="true"
+        [cols]="6"
+        [title]="'Choose Icon'"
+        [items]="items"
+        formControlName="avatar"></app-image-list-select>
+.....
+```
+
+Thus let the 'register' form on focus on the own business.
 
 
 
