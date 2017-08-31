@@ -16,6 +16,9 @@ import {AppRoutingModule} from '../app-routing.module';
 // used for the angular animations
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+// define the service and import
+import {ServicesModule} from '../services/services.module';
+
 import 'rxjs/add/operator/take';
 
 import 'hammerjs';
@@ -25,7 +28,9 @@ import 'hammerjs';
     HttpModule,
     SharedModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // show the service example
+    ServicesModule.forRoot()
   ],
   declarations: [
     HeaderComponent, 

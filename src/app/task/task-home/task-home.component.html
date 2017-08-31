@@ -13,7 +13,11 @@
         [draggedClass]="'drag-start'"
         [dragData]="list"
         [dragEnterClass]="'drag-enter'"
-        (dropped)="handleMove($event, list)">
+        (dropped)="handleMove($event, list)"
+
+        
+        [ngStyle]="{'order': list.order}">
+        <!-- [ngStyle] used for switch the list order -->
         <!-- newTask is gotten by the task-header component -->
         <app-task-header 
             [header]="list.name" 

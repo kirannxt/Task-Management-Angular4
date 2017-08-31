@@ -30,6 +30,7 @@ but here only animate one part of component-->
       ></md-checkbox>
   <!-- use [ngClass] to verify the boolean value of item.completed -->
   <div md-line class="content" [ngClass]="{'completed': item.completed}">
+                                                      <!-- same as [class.completed]="item.completed"  -->
     
     <span [md-tooltip]="item.desc">{{item.desc}}</span>
   </div>
@@ -38,7 +39,13 @@ but here only animate one part of component-->
       <!-- pipe for filter -->
       {{item.dueDate | date: 'dd/MM/yy'}}
     </span>
-    <md-icon *ngIf="item.remind">alarm</md-icon>
+
+    <ng-template [ngIf]="item.remind">
+      <md-icon>alarm</md-icon>
+    </ng-template>
+
+    <!-- this is the syntax sugar -->
+    <!-- <md-icon *ngIf="item.remind">alarm</md-icon> -->
   </div>
   <!--  -->
   <md-icon [svgIcon]="avatar" md-list-avatar class="avatar"></md-icon>

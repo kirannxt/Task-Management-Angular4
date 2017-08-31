@@ -23,6 +23,8 @@ import { NewTaskListComponent } from './new-task-list/new-task-list.component';
     CopyTaskComponent,
     NewTaskListComponent
   ],
+
+  // the components will show by some trigger, and load when created
   entryComponents: [
     NewTaskComponent,
     CopyTaskComponent,

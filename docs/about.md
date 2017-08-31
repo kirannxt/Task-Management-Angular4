@@ -598,7 +598,7 @@ this.cd.markForCheck();
  ...
 ```
 
-#### Create drag and drop directive and service
+#### Create attribute drag and drop directive and service
 
 Firstly, it provides the service 'drag-drop.service.ts' to let the directives import.
 
@@ -642,6 +642,39 @@ app-droppable
 
 The purpose of directive is to let the target component (element) add some attributes.
 
+
+#### Switch the task-list by [ngStyle]
+
+Using [ngStyle] to switch the element property
+
+in 'task-home' html file,
+
+```
+......
+[ngStyle]="{'order': list.order}">
+......
+```
+
+in 'task-home' ts file
+
+```
+handleMove(srcData, list) {
+switch (srcData.tag) {
+    case 'task-item': 
+        console.log('handling item');
+        break;
+    case 'task-list':
+        console.log('handle list');
+        const srcList = srcData.data;
+        const tempOrder = srcList.order;
+        srcList.order = list.order;
+        list.order = tempOrder;
+        break;
+    default:
+        break;
+    }
+}
+```
 
 
 
