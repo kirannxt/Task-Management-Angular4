@@ -690,6 +690,62 @@ create template form
 ```
 and use [(ngModel)] to bind the data.
 
+#### Modify the 'login' html form by model driven form
+
+firstly, add formgroup and ngsubmit on the form, and bind the formControlName with input tag,
+
+```
+...
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm, $event)">
+...
+
+formControlName="email"
+......
+```
+
+and then, I can use 'formgroup' or 'formbuilder' to bind this form in 'longin.component.ts',
+
+```
+...
+this.loginForm = new FormGroup({
+
+    // formControl to bind 'formControlName'
+    email: new FormControl('rick@gmail.com', Validators.compose([Validators.required, Validators.email])),
+    password: new FormControl('', Validators.required)
+});
+...
+
+this.loginForm = this.fb.group({
+    email: ['rick@rick.gmail', Validators.compose([Validators.required, Validators.email, this.validate])],
+    password: ['', Validators.required]
+});
+...
+
+```
+
+of course, I also can create self-defined Validator by
+
+```
+validate(fc: FormControl): {[key: string]: any} {
+    if (!fc.value) {
+        return null;
+    }
+
+    const pattern = /^rick+/;
+    if (pattern.test(fc.value)) {
+        return null;
+    }
+    return {
+        // bind {{loginForm.controls['email'].errors | json }}
+        emailNotValid: 'the email must be valid'
+    }
+}
+```
+
+The model driven form used to deal with some complex form.
+
+
+
 
 
 

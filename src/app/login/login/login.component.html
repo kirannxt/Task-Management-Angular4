@@ -1,5 +1,9 @@
 
-<form>
+
+<!-- model driven form -->
+<!-- use [formGroup] to define the whole form -->
+<!-- (ngSubmit) used for submit the form -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm, $event)">
 
   <md-card>
         
@@ -10,17 +14,23 @@
     <md-card-content>
   
       <md-input-container color="primary" placeholder="float" hintLabel="required" class="full-width">
-        <input mdInput type="text" placeholder="Your Email">
-        <span mdSuffix>gmail.com</span>
+                                                            <!-- similar as name="email" -->
+                                              <!-- used for bind formControlName or email in formbuilder -->
+        <input mdInput type="text" placeholder="Your Email" formControlName="email">
+        <!-- <span mdSuffix>gmail.com</span> -->
+
+        <!-- here will bind with emailNotValid: 'the email must be valid' -->
+        <md-error>{{loginForm.controls['email'].errors | json }}</md-error>
         
       </md-input-container>
   
       <md-input-container color="primary" placeholder="float" hintLabel="required" class="full-width">
-        <input mdInput type="password" placeholder="Your password">
+                                                                    <!-- similar as name="password" -->
+        <input mdInput type="password" placeholder="Your password" formControlName="password">
       </md-input-container>
   
-      
-      <button md-raised-button type="button" color="primary">Login</button>
+                                            <!-- if the form validators is false, will disable the submit button -->
+      <button md-raised-button type="submit" color="primary" [disabled]="!loginForm.valid">Login</button>
     </md-card-content>
   
     <md-card-actions class="text-right">
