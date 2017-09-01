@@ -68,6 +68,8 @@ export class ImageListSelectComponent implements ControlValueAccessor {
 
   }
 
+  //  is the validator for the whole self-defined form
+  // bind with provide: NG_VALIDATORS,
   validate(fc: FormControl): {[key: string]: any} {
     return this.selected ? null : {
       imageListInvalid: {

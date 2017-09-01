@@ -29,12 +29,19 @@ export class RegisterComponent implements OnInit {
       name: [],
       password: [],
       confirmpassword: [],
-      avatar: [img]
+      avatar: [img],
+      dateOfBirth: ['19/12/1990'],
     });
   }
 
   onSubmit({value, valid}, ev: Event) {
     
+    ev.preventDefault();
+    
+    if (!valid) {
+      return;
+    }
+    console.log(value);
   }
 
 }
