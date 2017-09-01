@@ -4,6 +4,7 @@ import { Injectable , Inject} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Quote} from '../domain/quote.model';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class QuoteService {
@@ -15,6 +16,8 @@ export class QuoteService {
         const uri = `${this.config.uri}/quotes/${Math.floor(Math.random()*10).toFixed(0)}`;
 
         // the 'this.http.get(uri)' is Observable type, need to transfer to json type
-        return this.http.get(uri).map(res => res.json() as Quote);
+        return this.http.get(uri)
+            .debug('quote:')
+            .map(res => res.json() as Quote);
     }
 }

@@ -13,7 +13,7 @@ export class NewTaskComponent implements OnInit {
 
   title = '';
 
-  private priorities = [
+  priorities = [
     {
       label: 'emergency',
       value: 1
@@ -33,6 +33,10 @@ export class NewTaskComponent implements OnInit {
   ngOnInit() {
     this.title = this.data.title;
     console.log(JSON.stringify(this.data.task));
+  }
+
+  onClick() {
+    
   }
 
 }

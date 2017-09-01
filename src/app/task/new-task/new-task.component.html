@@ -18,7 +18,9 @@
     <md-input-container class="full-width">
   
       <input mdInput [mdDatepicker]="dueDatepicker" type="text" placeholder="Due Date">
-  
+      
+      <!-- <md-datepicker-toggle mdSuffix [for]="dueDatepicker"></md-datepicker-toggle> -->
+
       <button type="button" mdSuffix [mdDatepickerToggle]="dueDatepicker"></button>
   
     </md-input-container>
@@ -32,7 +34,7 @@
   
       <!-- is similar as [mdMenuTriggerFor] in task-header component and [mdAutocomplete] in invite component -->
       <button type="button" mdSuffix [mdDatepickerToggle]="remindDatepicker"></button>
-  
+      <!-- <md-datepicker-toggle mdSuffix [for]="remindDatepicker"></md-datepicker-toggle> -->
     </md-input-container>
   
     <md-datepicker #remindDatepicker></md-datepicker>

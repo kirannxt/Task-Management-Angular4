@@ -767,7 +767,7 @@ Thus let the 'register' form on focus on the own business.
 
 In order to complete some event in event stream type, I add the rxjs libs
 
-##### Automatically update the login quotes
+#### Automatically update the login quotes
 
 Here, I firstly create the mock data in 'mock/data.json', and run `json-server ./mock/data.json` to start the mock server, and then run create the Quote type model in 'domain/user.model.ts', create the 'services/quote.service.ts' to produce the 'QuoteService' Objservable.
 
@@ -808,6 +808,54 @@ constructor(
 
 and let the 'login.component.html' use {{quote.en}} and quote.pic.
 
+
+#### Create debug util in  the 'debug.util.ts' 
+
+In order to create debug method on quote service, I create the debug method in Observable propotype
+
+```
+.....
+
+Observable.prototype.debug = function(message: string) {
+    return this.do(
+        (next) => {
+            if (!environment.production) {
+                console.log(message, next);
+            }
+        },
+
+        (err) => {
+            if (!environment.production) {
+                console.error('ERROR>>', message, err);
+            }
+        },
+
+        () => {
+            if (!environment.production) {
+                console.log('completed');
+            }
+        }
+    )
+}
+......
+
+```
+
+and use 'debug' in 'quota.service.ts'
+
+```
+.....
+getQuote(): Observable<Quote> {
+
+        const uri = `${this.config.uri}/quotes/${Math.floor(Math.random()*10).toFixed(0)}`;
+
+        // the 'this.http.get(uri)' is Observable type, need to transfer to json type
+        return this.http.get(uri)
+            .debug('quote:')
+            .map(res => res.json() as Quote);
+    }
+......
+```
 
 
 

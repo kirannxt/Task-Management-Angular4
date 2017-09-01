@@ -21,6 +21,8 @@ import {ServicesModule} from '../services/services.module';
 
 import 'rxjs/add/operator/take';
 
+import '../utils/debug.util';
+
 import 'hammerjs';
 
 @NgModule({

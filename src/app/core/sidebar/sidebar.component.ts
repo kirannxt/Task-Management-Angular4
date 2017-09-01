@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
   @Output() navClick = new EventEmitter<void>();
 
-  private today = 'day';
+  today = 'day';
   constructor() { }
 
   ngOnInit() {
