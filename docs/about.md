@@ -763,6 +763,51 @@ I create the self-defined form, and import it in 'register' form
 Thus let the 'register' form on focus on the own business.
 
 
+### Add Rxjs on the Project
+
+In order to complete some event in event stream type, I add the rxjs libs
+
+##### Automatically update the login quotes
+
+Here, I firstly create the mock data in 'mock/data.json', and run `json-server ./mock/data.json` to start the mock server, and then run create the Quote type model in 'domain/user.model.ts', create the 'services/quote.service.ts' to produce the 'QuoteService' Objservable.
+
+```
+@Injectable()
+export class QuoteService {
+
+    constructor(private http: Http, @Inject('BASE_CONFIG') private config) {}
+
+    getQuote(): Observable<Quote> {
+
+        const uri = `${this.config.uri}/quotes/${Math.floor(Math.random()*10).toFixed(0)}`;
+
+        // the 'this.http.get(uri)' is Observable type, need to transfer to json type
+        return this.http.get(uri).map(res => res.json() as Quote);
+    }
+}
+```
+
+At last, in 'login.component.ts' file, I inject the QuoteService and assign the quote Observable to 'this.quote',
+
+```
+...
+constructor(
+    private fb: FormBuilder,
+
+    // this is a event stream
+    private quoteService$: QuoteService) {
+
+      // it will get the Quote type Observable
+      this.quoteService$
+        .getQuote()
+        // and then assign the event stream to this.quote
+        .subscribe(q => this.quote = q);
+     }
+     ...
+```
+
+and let the 'login.component.html' use {{quote.en}} and quote.pic.
+
 
 
 

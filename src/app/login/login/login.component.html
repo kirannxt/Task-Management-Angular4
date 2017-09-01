@@ -47,16 +47,17 @@
       Recommended Daily Rhesis
     </md-card-title>
     <md-card-subtitle>
-        Do not, for one repulse, forgo the purpose that you resolved to effort. --- William Shakespeare
+      {{quote.en}}  
+      <!-- Do not, for one repulse, forgo the purpose that you resolved to effort. --- William Shakespeare -->
     </md-card-subtitle>
 
   </md-card-header>
 
-  <img md-card-image src="/assets/Melbourne.jpg" alt="">
+  <img md-card-image [src]="quote.pic" alt="">
 
   <md-card-content>
-      This is made by 'md-card' tag imported from '@angular/material'.
-    
+      <!-- This is made by 'md-card' tag imported from '@angular/material'. -->
+      <!-- {{quote.en}} -->
   </md-card-content>
 
   

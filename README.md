@@ -8,12 +8,12 @@ More details in 'docs/about.md'.
 
 #### The skills used
 
-1. Control the state and response by @ngrx/store and @ngrx/effects
-2. Complete the reactive programming by rxjs
-3. Create REST API by json-server
-4. Desgin the front page by @angular/material
-5. Apply the animations by @angular/animations
-6. Encapsulate some self-defined componnets, form components, directives and pipes
+1. Desgin the front page by @angular/material
+2. Apply the animations by @angular/animations
+3. Encapsulate some self-defined componnets, form components, directives and pipes  
+4. Complete the reactive programming by rxjs 
+5. Control the state and response by @ngrx/store and @ngrx/effects   
+6. Create REST API by json-server
 7. Complete the unit test by karma
 
 

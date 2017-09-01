@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 // import the forms functions
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 
+// import the service as event stream
+import {QuoteService} from '../../services/quote.service'
+import {Quote} from '../../domain/quote.model';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,8 +17,26 @@ export class LoginComponent implements OnInit {
   // bind the [FormGroup]="loginForm" in 'login.component.html'
   loginForm: FormGroup;
 
+  // let q become the Quote type.
+  quote: Quote = {
+    cn: "我们在人生中会作出许多选择，带着这些选择继续生活，才是人生中最难的一课。《妙笔生花》",
+    en: "We all make our choices in life. The hard thing to do is live with them.",
+    pic: "/assets/img/quotes/quote_fallback.jpg"
+  };
+
   // inject the formBuilder
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+
+    // this is a event stream, QuoteService is '@Injectable()'.
+    private quoteService$: QuoteService) {
+
+      // it will get the Quote type Observable
+      this.quoteService$
+        .getQuote()
+        // and then assign the event stream to this.quote
+        .subscribe(q => this.quote = q);
+     }
 
   ngOnInit() {
 
