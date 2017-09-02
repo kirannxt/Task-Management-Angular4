@@ -11,6 +11,8 @@ import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog
 import {routerAnimation} from '../../animation/router.animation';
 import {listAnimation} from '../../animation/list.animation';
 
+import {ProjectService} from '../../services/project.service';
+
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -28,6 +30,7 @@ export class ProjectListComponent implements OnInit {
   // bind the router animation with the whole component,
   @HostBinding('@routerAnim') state;
 
+  /*
   projects = [
     {
       "id": 1,
@@ -41,12 +44,19 @@ export class ProjectListComponent implements OnInit {
       "desc": 'this is new task management platform',
       "coverImg": 'assets/img/covers/1.jpg'
     }
-  ]
+  ] */
+
+  projects;
 
   // 1. inject cd: ChangeDetectorRef
-  constructor(private diaglog: MdDialog, private cd: ChangeDetectorRef) { }
+  constructor(
+    private diaglog: MdDialog, 
+    private cd: ChangeDetectorRef,
+    private service$: ProjectService
+  ) { }
 
   ngOnInit() {
+    this.service$.get("1").subscribe(projects => this.projects = projects)
   }
 
   // click to open the new project dialog, this dialog is put in the entryComponents.
