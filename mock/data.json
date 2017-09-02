@@ -46,30 +46,21 @@
     ],
     "projects": [
       {
-        "id": "Sk2HaTagb",
-        "name": "问题跟踪系统",
-        "desc": "用于 Bug 的内部跟踪和管理",
-        "coverImg": "/assets/img/covers/1.jpg",
-        "members": [
-          "37489e0c-df34-c261-71c4-ce75357e3035",
-          "BkkDvwee-"
-        ]
+        "id": 1,
+        "name": "task management platform",
+        "desc": "this is one task management platform",
+        "coverImg": "assets/img/covers/0.jpg",
+        "members": ["1", "2"]
       },
       {
-        "name": "某某公司 ERP 系统",
-        "desc": "为某某公司开发的定制化 ERP 系统",
-        "coverImg": "/assets/img/covers/20.jpg",
-        "members": [
-          "37489e0c-df34-c261-71c4-ce75357e3035"
-        ],
-        "id": "Hya1moGb-",
-        "taskLists": [
-          "BylTyXiM-b",
-          "BkWpk7jGZb",
-          "H1fTyXjMWW"
-        ]
+        "id": 2,
+        "name": "new task management platform",
+        "desc": "this is new task management platform",
+        "coverImg": "assets/img/covers/1.jpg",
+        "members": ["1"]
       }
     ],
+
     "taskLists": [
       {
         "name": "待办",

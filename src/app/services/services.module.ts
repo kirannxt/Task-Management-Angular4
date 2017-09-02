@@ -5,6 +5,7 @@ import {QuoteService} from './quote.service';
 
 // import the projectservice
 import {ProjectService} from './project.service';
+// import {TaskListService} from './task-list.service';
 
 
 @NgModule()
@@ -16,7 +17,8 @@ export class ServicesModule {
       ngModule: ServicesModule,
       providers: [
         QuoteService,
-        ProjectService
+        ProjectService,
+        // TaskListService
       ]
     }
   }

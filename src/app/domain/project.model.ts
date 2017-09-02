@@ -7,6 +7,6 @@ export interface Project {
     desc?: string;
     coverImg?: string;
     taskLists?: string[]; // task list in project
-    members?: string[]; // project member
+    members?: string[]; // project member id
 }
 

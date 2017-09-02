@@ -1,7 +1,7 @@
 
 export interface TaskList {
 
-    d?: string;
+    id?: string;
     name: string;
     order: number;
     taskIds: string[];

@@ -6,7 +6,7 @@ export interface Task {
     completed: boolean;
     priority: number;
     dueDate?: Date;
-    remind?: Date;
+    reminder?: Date;
     createDate: Date;
     remark?: string;
     ownerId?: string;

@@ -46,7 +46,7 @@ export class ProjectListComponent implements OnInit {
     }
   ] */
 
-  projects;
+  projects = [];
 
   // 1. inject cd: ChangeDetectorRef
   constructor(
@@ -56,7 +56,13 @@ export class ProjectListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service$.get("1").subscribe(projects => this.projects = projects)
+    this.service$.get("1").subscribe(projects => {
+      this.projects = projects;
+
+      // if get the data from server end, must do dirty value check. because it use the 
+      this.cd.markForCheck();
+    });
+    
   }
 
   // click to open the new project dialog, this dialog is put in the entryComponents.
@@ -73,7 +79,7 @@ export class ProjectListComponent implements OnInit {
         {id: 4, name: 'NewNew Project', desc: 'this is newnew project', coverImg: 'assets/img/covers/4.jpg'}
       ];
 
-      // 2. tell the component that only execute this branch by markforcheck
+      // 2. tell the component that only execute this branch by markforcheck, match changeDetection: ChangeDetectionStrategy.OnPush
       this.cd.markForCheck();
     });
   }

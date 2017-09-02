@@ -857,7 +857,57 @@ getQuote(): Observable<Quote> {
 ......
 ```
 
+#### Create the project.service
 
+Firstly, I code the 'project.service.ts' to create the 'ProjectService' in Observable type, 
+
+```
+......
+
+@Injectable()
+export class ProjectService {
+
+    private readonly domain = 'projects';
+
+    // for the post method
+    private headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    constructor(private http: Http, @Inject('BASE_CONFIG') private config) { }
+    add(project: Project): Observable<Project> {
+        .....
+    }
+
+    update(project: Project): Observable<Project> {
+       ......
+    }
+
+    del(project: Project): Observable<Project> {
+       ......
+    }
+
+    get (userId: string): Observable<Project[]> {
+        ......
+    }
+}
+```
+
+and then let the 'project-list.ts' to inject this service, and get the projects array
+
+```
+......
+ngOnInit() {
+    this.service$.get("1").subscribe(projects => {
+      this.projects = projects;
+
+      // if get the data from server end, must do dirty value check. because it use the 
+      this.cd.markForCheck();
+    });
+    
+  }
+  ......
+```
 
 
 
