@@ -58,8 +58,8 @@ export class TaskListService {
             .map(res => res.json() as TaskList[]);
     }
 
-    // switch the lists
-    swapOrder(src: TaskList, target: TaskList): Observable<TaskList[]> {
+    // switch the lists order
+    swapOrder1(src: TaskList, target: TaskList): Observable<TaskList[]> {
 
         // the srouce list uri
         const dragUri = `${this.config.uri}/${this.domain}/${src.id}`;
@@ -81,4 +81,6 @@ export class TaskListService {
             // produce the new tasklists array
             .reduce((arrs, list) => [...arrs, list], []);
     }
+
+    
 }

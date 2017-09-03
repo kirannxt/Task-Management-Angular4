@@ -48,7 +48,8 @@ export class ProjectService {
     del(project: Project): Observable<Project> {
         
         // define the event stream, from the tasklist array in this project
-        const delTasks$ = Observable.from(project.taskLists)
+        // becaue the new project has not tasklist property
+        const delTasks$ = Observable.from(project.taskLists ? project.taskLists : [])
         //  for each event stream (list), I delete the tasks in this listId by 
         // mergeMap means that delete all the substreams from merged outside streams
         // json server will delete all the tasks in the tasklist

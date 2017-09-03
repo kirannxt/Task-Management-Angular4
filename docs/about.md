@@ -909,6 +909,45 @@ ngOnInit() {
   ......
 ```
 
+#### Import the project service on the project-list component
+
+```
+openNewProjectDialog() {
+
+    const selectedImg = `/assets/img/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
+
+    // open the newProjectComponent and send data to the new component
+    const dialogRef = this.diaglog.open(
+      NewProjectComponent, 
+      {data: {thumbnails: this.getThumbnails(), img: selectedImg}});
+
+    // the dislogref will receive the data from another one.
+    dialogRef.afterClosed()
+
+    // just need one, donot need unsubscribe
+      .take(1)
+    // confirm here has value
+      .filter(n => n)
+      // for the add service, I also need to subscribe
+      .map(val => ({...val, coverImg: this.buildImgSrc(val.coverImg)}))
+
+      // for each stream, I use add method to create project.
+      .switchMap(v => this.service$.add(v))
+      // .subscribe(project => console.log(project));
+      .subscribe(project => {
+        // add this project on array.
+        this.projects = [...this.projects, project];
+
+        // must dirty value check.
+        this.cd.markForCheck();
+      });
+  }
+```
+
+OpenUpdateDialog, OpenConfirmDialog have the similar redefined.
+
+ 
+
 
 
 
