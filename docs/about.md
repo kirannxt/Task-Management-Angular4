@@ -946,7 +946,85 @@ openNewProjectDialog() {
 
 OpenUpdateDialog, OpenConfirmDialog have the similar redefined.
 
- 
+
+#### Create the user service and auth service
+
+Based on the user.model and auth.model, I consider the service how to deal with user and authenuser.
+
+Here I need that each project has multiple members and each user also can have multiple projectIds.
+
+in the 'user.service' file, I realize some methods, searchUsers, getUsersbyProject, addProjectRef, removeProjectRef, and batchUpdateProjectRef.
+
+```
+// it means that it can be inject in the constructor func
+@Injectable()
+export class UserService {
+
+    private readonly domain = 'users';
+
+    // for the post method
+    private headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    // this DI is defined 
+    constructor(private http: Http, @Inject('BASE_CONFIG') private config) { }
+
+    // get the user by email
+    searchUsers(filter: string): Observable<User[]> {
+       ......
+    }
+    getUsersbyProject(projectId: string): Observable<User[]> {
+        ......
+    }
+    addProjectRef(user: User, projectId: string): Observable<User> {
+        ......
+    }
+
+    removeProjectRef(user: User, projectId: string): Observable<User> {
+        ......
+    }
+
+    batchUpdateProjectRef(project: Project): Observable<User[]> {
+        ......
+    }
+
+```
+
+and as well in the 'auth.service'
+
+```
+@Injectable()
+export class AuthService {
+
+    private readonly domain = 'users';
+    private headers = new Headers({
+        'Content-Type': 'application/json'
+    });
+
+    // based on the jwt json web token
+    private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
+    '.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9' +
+    '.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ';
+
+    constructor(private http: Http, @Inject('BASE_CONFIG') private config) {}
+
+    // register --- receive the user and return the auth
+    register(user: User): Observable<Auth> {
+        ......
+    }
+
+    // defien login method
+    login(username: string, password: string ): Observable<Auth> {
+        ......
+    } 
+```
+upon file will add the register and login methods
+
+
+
+
+
 
 
 
