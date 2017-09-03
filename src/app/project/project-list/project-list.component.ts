@@ -111,8 +111,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       });
   }
 
-  OpenInviteDialog() {
-    const dialogRef = this.diaglog.open(InviteComponent);
+  OpenInviteDialog(project) {
+    const dialogRef = this.diaglog.open(InviteComponent, {data: {members: []}});
     
   }
 

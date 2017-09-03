@@ -21,10 +21,9 @@ export class UserService {
 
     // get the user by email
     searchUsers(filter: string): Observable<User[]> {
-        const uri = `${this.config.uri}/${this.domain}`;
-            return this.http
-                .get(uri, {params: {'email_like': filter}})
-                .map(res => res.json() as User[]);
+    const uri = `${this.config.uri}/${this.domain}`;
+    return this.http.get(uri, {params: {'email_like': filter}})
+      .map(res => res.json() as User[]);
     }
 
     // get the user by project id

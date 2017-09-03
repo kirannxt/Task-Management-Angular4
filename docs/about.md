@@ -1021,6 +1021,11 @@ export class AuthService {
 ```
 upon file will add the register and login methods
 
+#### Create the chips-list shared component and import to invite
+
+Create the shared component 'chips-list', use mdAutocomplete tag to bind the input with list, and set the 
+input type property which is input from 'invite' component.
+
 
 
 

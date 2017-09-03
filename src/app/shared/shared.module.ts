@@ -28,11 +28,13 @@ import {
   MdNativeDateModule,
   MdSelectModule,
   MdSidenavModule,
-  MdButtonToggleModule
+  MdButtonToggleModule,
+  MdChipsModule,
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { AgeInputComponent } from './age-input/age-input.component';
+import { ChipsListComponent } from './chips-list/chips-list.component';
 
 @NgModule({
   imports: [
@@ -58,12 +60,14 @@ import { AgeInputComponent } from './age-input/age-input.component';
     DirectiveModule,
     FormsModule,
     ReactiveFormsModule,
-    MdButtonToggleModule
+    MdButtonToggleModule,
+    MdChipsModule
   ],
   declarations: [
     ConfirmDialogComponent, 
     ImageListSelectComponent, 
-    AgeInputComponent
+    AgeInputComponent, 
+    ChipsListComponent
   ],
   exports: [
     CommonModule,
@@ -90,7 +94,9 @@ import { AgeInputComponent } from './age-input/age-input.component';
     ReactiveFormsModule,
     ImageListSelectComponent,
     AgeInputComponent,
-    MdButtonToggleModule
+    MdButtonToggleModule,
+    MdChipsModule,
+    ChipsListComponent
   ],
   entryComponents: [ConfirmDialogComponent]
 })
