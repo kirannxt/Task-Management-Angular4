@@ -115,6 +115,7 @@ export class AreaListComponent implements OnInit, OnDestroy, ControlValueAccesso
     }
   }
 
+  // here _province is the observer
   writeValue(obj: Address): void {
     if (obj) {
       this._address = obj;

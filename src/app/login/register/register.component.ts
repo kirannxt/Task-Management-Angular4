@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: [],
       confirmpassword: [],
       avatar: [img],
-      dateOfBirth: ['19/12/1990'],
+      dateOfBirth: ['1990-01-01'],
 
       address: [],
       identity: [],

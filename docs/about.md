@@ -1026,6 +1026,64 @@ upon file will add the register and login methods
 Create the shared component 'chips-list', use mdAutocomplete tag to bind the input with list, and set the 
 input type property which is input from 'invite' component.
 
+#### Create the identity-input and area-list shared components
+
+I use Subject to create the event stream in the both component, and realize the component.
+
+in the 'area-list' component
+
+```
+......
+  _province = new Subject();
+  _city = new Subject();
+  _district = new Subject();
+  _street = new Subject();
+  ......
+
+ const province$ = this._province.asObservable().startWith('');
+ const city$ = this._city.asObservable().startWith('');
+ const district$ = this._district.asObservable().startWith('');
+ const street$ = this._street.asObservable().startWith('');
+ ......
+
+ writeValue(obj: Address): void {
+    if (obj) {
+      this._address = obj;
+    }
+    if (this._address.province) {
+      this._province.next(this._address.province);
+    }
+    if (this._address.city) {
+      this._city.next(this._address.city);
+    }
+    if (this._address.district) {
+      this._district.next(this._address.district);
+    }
+    if (this._address.street) {
+      this._street.next(this._address.street);
+    }
+  }
+  ....
+```
+
+and then import them in the 'register' component
+
+```
+<md-tab label="Personal Information">
+    <div class="full-width">
+        <app-identity-input formControlName="identity"></app-identity-input>
+    </div>
+    <div class="full-width">
+        <app-age-input formControlName="dateOfBirth"></app-age-input>
+    </div>
+    <div class="full-width">
+        <app-area-list formControlName="address"></app-area-list>
+    </div>
+</md-tab>
+
+```
+
+
 
 
 
