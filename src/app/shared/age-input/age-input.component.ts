@@ -1,5 +1,5 @@
 
-import { Component, OnInit, forwardRef, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { 
   ControlValueAccessor, 
   NG_VALUE_ACCESSOR, 
@@ -65,7 +65,8 @@ export interface Age {
       // one for mult
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 

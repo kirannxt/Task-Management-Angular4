@@ -18,12 +18,14 @@ export class DragDropService {
   // BehaviorSubject can remember the value last time
   private _dragData = new BehaviorSubject<DragData>(null);
 
-  // store the data
+  // store the newest data
+  // when begin to drag, it will add the new data to this stream
   setDragData(data: DragData) {
     this._dragData.next(data);
   }
 
-  // get the data
+  // get the newest data
+  // when release the drag, it will get the Observable and get newest data and 
   getDragData(): Observable<DragData> {
     return this._dragData.asObservable();
   }
