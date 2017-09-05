@@ -70,14 +70,14 @@ export interface Age {
 })
 export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
-  // dateOfBirth;
+  dateOfBirth;
   @Input() daysTop = 90;
   @Input() daysBottom = 0;
   @Input() monthTop = 24;
   @Input() monthBottom = 1;
   @Input() yearsTop = 150;
   @Input() yearsBottom = 1;
-  @Input() format = 'DD/MM/YYYY';
+  @Input() format = 'YYYY-MM-DD';
   @Input() debounceTime = 500;
 
 
@@ -115,6 +115,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
     // get the event stream
     const birthday$ = birthday.valueChanges
+    //deal with the stream and add the 'from' source, 'd' is the date stream on each time (change) 
                               .map(d => {
                                 return {date: d, from: 'birthday'};
                               })
@@ -136,6 +137,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
                             // avoid the repeated input
                             .distinctUntilChanged();
 
+                            // combine the upon two streams to single one
     const age$ = Observable.combineLatest(ageNum$, ageUnit$, (_n, _u) => {
 
                               // from age to date
@@ -146,16 +148,23 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
                             })
                             // verify the age validator
                             .filter(_ => this.birthdayForm.get('age').valid);
-
+    
+    // merge the stream from birthday and stream from age
     const merged$ = Observable.merge(birthday$, age$)
                               .filter(_ => this.birthdayForm.valid);
 
+                              // merged$ is series of object {d, from}
+
     this.sub = merged$.subscribe(d => {
+
+      // will confirm the stream which from, if it is from birthday, it will set the value to num and unit
 
       // from date to age
       const age = this.toAge(d.date);
 
       if (d.from === 'birthday') {
+
+        // 只有在转化后的数值和原来数值不相等的时候才重新设置新值
         if (age.age !== ageNum.value) {
           ageNum.patchValue(age.age, {emitEvent: false});
         }
@@ -163,8 +172,11 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
           this.selectedUnit = age.unit;
           ageUnit.patchValue(age.unit, {emitEvent: false});
         }
+        // 最后将这个新值发送出去，让外面知道这个值有变化
         this.propagateChange(d.date);
       } else {
+        // 否则就是从age这边来的，d.from === 'age'
+        // 防止循环互相设置
         const ageToCompare = this.toAge(birthday.value);
         if (age.age !== ageToCompare.age || age.unit !== ageToCompare.unit) {
           birthday.patchValue(d.date, {emitEvent: false});
@@ -189,6 +201,8 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
   
   // if the target tag value changed, tell the form
   // <app-age-input formControlName="dateOfBirth" (change)="onChange($event)"></app-age-input>
+  // fn是外界的函数例如 （change）="xxxx", 当外界使用这个方法的时候，我将这个方法传递到我自己定义的私有函数方法propagateChange，这样
+  // 当我在内部通过这个私有函数写入这个值的时候，我在ngInit 或者writeValue调用这个私有函数将这个值传递到外界。
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
@@ -209,7 +223,8 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
           isBefore(subMonths(now, this.monthTop), date) ? 
             {age: differenceInMonths(now, date), unit: AgeUnit.Month} :
               {
-                age: differenceInYears(now, date), unit: AgeUnit.Year
+                age: differenceInYears(now, date), 
+                unit: AgeUnit.Year
               };
   }
 
@@ -218,16 +233,19 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
   toDate(age: Age): string {
 
     const now = Date.now();
-    
+    // const dateFormat = 'YYYY-MM-DD';
     switch(age.unit) {
       case AgeUnit.Year:
+        // subYears means now - year
         return format(subYears(now, age.age), this.format);
       case AgeUnit.Month:
         return format(subMonths(now, age.age), this.format);
       case AgeUnit.Day: 
         return format(subDays(now, age.age), this.format);
-      default:
+      default: {
         return null;
+      }
+        
     }
   }
 
@@ -235,7 +253,7 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     if (this.sub) {
-      this.sub.unsubscribe;
+      this.sub.unsubscribe();
     }
   }
 
@@ -259,20 +277,21 @@ export class AgeInputComponent implements ControlValueAccessor, OnInit, OnDestro
   // for the birthday form validator
   validateDate(fc: FormControl): {[key: string]: any} {
     const val = fc.value;
+
     return isValidDate(val) ? null : {
-        birthdayInvalid : true
+      birthdayInvalid : true
     };
   }
   
   
-  validateAge(ageNumKey: string, ageUnitKey: string) {
+  validateAge(ageNumKey: string, ageUnitKey: string){
     
     return (group: FormGroup): {[key: string]: any} => {
       const ageNum = group.controls[ageNumKey];
       const ageUnit = group.controls[ageUnitKey];
 
       let result = false;
-      const ageNumVal = ageNum.value;
+      const ageNumVal = ageNum.value; 
 
       switch(ageUnit.value) {
         case AgeUnit.Year:
